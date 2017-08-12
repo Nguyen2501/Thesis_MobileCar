@@ -32,6 +32,7 @@
 #include "inc/hw_memmap.h"
 #include "inc/hw_types.h"
 #include "define.h"
+#include "SystemConfig.h"
 
 #include "Timer/Timer.h"
 #include "Button/Button.h"

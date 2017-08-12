@@ -11,10 +11,10 @@
 extern int headingAngle;
 extern float headingOffset;
 
-void hmc5883lInit(void);
-void hmc5883lMeasurement(int16_t *xAxixvalue, int16_t *yAxixvalue, int16_t *zAxixvalue);
+extern void hmc5883lInit(void);
+extern void hmc5883lMeasurement(int16_t *xAxixvalue, int16_t *yAxixvalue, int16_t *zAxixvalue);
 
-float hmc5883lCalibration(int xAxisvalue, int yAxisvalue, int zAxisvalue);
-int hmc5883lAzimuth();
+extern float hmc5883lCalibration(int xAxisvalue, int yAxisvalue, int zAxisvalue);
+extern int hmc5883lAzimuth();
 
 #endif /* SENSOR_HMC5883L_SENSOR_HMC5883L_H_ */

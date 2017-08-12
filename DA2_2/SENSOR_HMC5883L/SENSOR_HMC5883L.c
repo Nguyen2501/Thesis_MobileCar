@@ -1,5 +1,5 @@
-/*
- * SENSOR_HMC5883L.c
+
+ /* SENSOR_HMC5883L.c
  *
  *  Created on: Aug 9, 2017
  *      Author: Nguyen
@@ -8,6 +8,12 @@
 #include "../include.h"
 #include "SENSOR_HMC5883L.h"
 #include "HMC5883LPinMap.h"
+
+static void hmc5883lTimertimeout(void);
+static void hmc5883lStoptimeout(void);
+static TIMER_ID hmc5883lRuntimeout(TIMER_CALLBACK_FUNC TimeoutCallback, uint32_t msTime);
+
+static TIMER_ID hmc5883l_TimerID = INVALID_TIMER_ID;
 
 static void i2cInit(void){
 	SysCtlPeripheralEnable(SENSOR_PERIPHERAL);
@@ -23,6 +29,7 @@ static void i2cInit(void){
 
 	I2CMasterInitExpClk(SENSOR_I2C, SysCtlClockGet(), true);
 	SysCtlDelay(2);
+
 }
 
 static uint8_t i2CRead(uint8_t address, uint8_t registerAddress){

@@ -30,6 +30,7 @@ SENSOR_HMC5883L/SENSOR_HMC5883L.obj: E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_gp
 SENSOR_HMC5883L/SENSOR_HMC5883L.obj: E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_memmap.h
 SENSOR_HMC5883L/SENSOR_HMC5883L.obj: E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_types.h
 SENSOR_HMC5883L/SENSOR_HMC5883L.obj: ../SENSOR_HMC5883L/../define.h
+SENSOR_HMC5883L/SENSOR_HMC5883L.obj: ../SENSOR_HMC5883L/../SystemConfig.h
 SENSOR_HMC5883L/SENSOR_HMC5883L.obj: ../SENSOR_HMC5883L/../Timer/Timer.h
 SENSOR_HMC5883L/SENSOR_HMC5883L.obj: ../SENSOR_HMC5883L/../Button/Button.h
 SENSOR_HMC5883L/SENSOR_HMC5883L.obj: ../SENSOR_HMC5883L/../SENSOR_HMC5883L/SENSOR_HMC5883L.h
@@ -65,6 +66,7 @@ E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_gpio.h:
 E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_memmap.h: 
 E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_types.h: 
 ../SENSOR_HMC5883L/../define.h: 
+../SENSOR_HMC5883L/../SystemConfig.h: 
 ../SENSOR_HMC5883L/../Timer/Timer.h: 
 ../SENSOR_HMC5883L/../Button/Button.h: 
 ../SENSOR_HMC5883L/../SENSOR_HMC5883L/SENSOR_HMC5883L.h: 

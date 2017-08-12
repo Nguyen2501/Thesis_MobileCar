@@ -30,6 +30,7 @@ Button/Button.obj: E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_gpio.h
 Button/Button.obj: E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_memmap.h
 Button/Button.obj: E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_types.h
 Button/Button.obj: ../Button/../define.h
+Button/Button.obj: ../Button/../SystemConfig.h
 Button/Button.obj: ../Button/../Timer/Timer.h
 Button/Button.obj: ../Button/../Button/Button.h
 Button/Button.obj: ../Button/../SENSOR_HMC5883L/SENSOR_HMC5883L.h
@@ -65,6 +66,7 @@ E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_gpio.h:
 E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_memmap.h: 
 E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_types.h: 
 ../Button/../define.h: 
+../Button/../SystemConfig.h: 
 ../Button/../Timer/Timer.h: 
 ../Button/../Button/Button.h: 
 ../Button/../SENSOR_HMC5883L/SENSOR_HMC5883L.h: 

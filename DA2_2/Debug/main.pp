@@ -30,6 +30,7 @@ main.obj: E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_gpio.h
 main.obj: E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_memmap.h
 main.obj: E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_types.h
 main.obj: ../define.h
+main.obj: ../SystemConfig.h
 main.obj: ../Timer/Timer.h
 main.obj: ../Button/Button.h
 main.obj: ../SENSOR_HMC5883L/SENSOR_HMC5883L.h
@@ -65,6 +66,7 @@ E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_gpio.h:
 E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_memmap.h: 
 E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_types.h: 
 ../define.h: 
+../SystemConfig.h: 
 ../Timer/Timer.h: 
 ../Button/Button.h: 
 ../SENSOR_HMC5883L/SENSOR_HMC5883L.h: 

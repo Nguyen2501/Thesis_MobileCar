@@ -10,6 +10,7 @@ GEN_OPTS__FLAG :=
 GEN_CMDS__FLAG := 
 
 ORDERED_OBJS += \
+"./SystemConfig.obj" \
 "./main.obj" \
 "./tm4c123gh6pm_startup_ccs.obj" \
 "./Timer/Timer.obj" \
@@ -161,8 +162,8 @@ DA2_2.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(EXE_OUTPUTS__QUOTED)$(BIN_OUTPUTS__QUOTED)
-	-$(RM) "main.pp" "tm4c123gh6pm_startup_ccs.pp" "Timer\Timer.pp" "SENSOR_HMC5883L\SENSOR_HMC5883L.pp" "Button\Button.pp" 
-	-$(RM) "main.obj" "tm4c123gh6pm_startup_ccs.obj" "Timer\Timer.obj" "SENSOR_HMC5883L\SENSOR_HMC5883L.obj" "Button\Button.obj" 
+	-$(RM) "SystemConfig.pp" "main.pp" "tm4c123gh6pm_startup_ccs.pp" "Timer\Timer.pp" "SENSOR_HMC5883L\SENSOR_HMC5883L.pp" "Button\Button.pp" 
+	-$(RM) "SystemConfig.obj" "main.obj" "tm4c123gh6pm_startup_ccs.obj" "Timer\Timer.obj" "SENSOR_HMC5883L\SENSOR_HMC5883L.obj" "Button\Button.obj" 
 	-@echo 'Finished clean'
 	-@echo ' '
 
