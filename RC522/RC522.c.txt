@@ -1,0 +1,436 @@
+/*
+ * RC522.c
+ *
+ *  Created on: Aug 29, 2017
+ *      Author: Nguyen
+ */
+
+#include "include.h"
+#include "driverlib/ssi.h"
+#include "RC522.h"
+#include "define.h"
+
+static void RC522TimerTimeout(void);
+static void RC522TimerTimeout(void);
+static void RC522TimerTimeout(void);
+
+uint32_t trashbin[2];
+
+static void SPIInit(){
+	SysCtlPeripheralEnable(RC522_FUNCTION);
+	SysCtlDelay(2);
+	SysCtlPeripheralEnable(RC522_ALTERNATE_FUNCTION);
+	SysCtlDelay(2);
+
+	GPIOPinConfigure(GPIO_PA2_SSI0CLK);
+	GPIOPinConfigure(GPIO_PA3_SSI0FSS);
+	GPIOPinConfigure(GPIO_PA4_SSI0RX);
+	GPIOPinConfigure(GPIO_PA5_SSI0TX);
+
+	GPIOPinTypeSSI(GPIO_PORTA_BASE, RC522_CS_PIN | RC522_MISO_PIN | RC522_MOSI_PIN | RC522_SCK_PIN);
+	SSIConfigSetExpClk(RC522_PORT, SysCtlClockGet(), SSI_FRF_MOTO_MODE_3, SSI_MODE_MASTER, 4000000, 8);
+	SSIEnable(RC522_PORT);
+//	SSIIntEnable()
+}
+
+static uint32_t SSIReadWrite(uint32_t writedata){
+	//Empty TX FIFO
+	while(SSIDataPutNonBlocking(RC522_PORT, &trashbin[0]));
+	//Send byte through SPI peripheral
+	SSIDataPut(RC522_PORT, writedata);
+	//Wait until transfer is done
+	while(SSIDataGetNonBlocking(RC522_PORT, &trashbin[0]));
+	//Return the byte read from SPI bus
+	SSIDataGet(RC522_PORT, &trashbin[1]);
+	return trashbin[1];
+}
+
+static void RC522WriteRegister(uint32_t address, uint32_t value){
+	uint32_t status;
+	RC522_CS_LOW;
+	while(SSIBusy(RC522_PORT));
+	status = SSIReadWrite((address << 1) & 0x0000007E);
+	while(SSIBusy(RC522_PORT));
+	status = SSIReadWrite(value);
+	RC522_CS_HIGH;
+}
+
+static uint32_t RC522ReadRegister(uint32_t address){
+	 uint32_t value;
+	 RC522_CS_LOW;
+	 while(SSIBusy(RC522_PORT));
+	 SSIReadWrite(((address << 1) & 0x0000007E) | 0x00000080);
+	 while(SSIBusy(RC522_PORT));
+	 value = SSIReadWrite(0x00000000);
+	 RC522_CS_HIGH;
+
+	 return value;
+}
+
+
+//static void RC522WriteOld(char address, char value){
+//	GPIOPinWrite(RC522_PORT, RC522_CS_PIN, 1);
+//	SSIDataPut(RC522_PORT, (address<< 1) & 0x7E);
+//	SSIDataPut(RC522_PORT, value);
+//	GPIOPinWrite(RC522_PORT, RC522_CS_PIN, 0);
+//}
+
+//static char RC522ReadOld(char address){
+//	char value;
+//	GPIOPinWrite(RC522_PORT, RC522_CS_PIN, 0);
+//	SSIDataPut(RC522_PORT, ((address<< 1) & 0x7E) | 0x80);
+////	value = SSIDataGet(0x00);
+//	value = (char)SSIDataGetNonBlocking(RC522_PORT, 0x00);
+//	GPIOPinWrite(RC522_PORT, RC522_CS_PIN, 1);
+//	return value;
+//}
+//
+//uint8_t RC522Read(uint8_t address){
+//	uint8_t count, ucaddress;
+//	uint8_t ucresult = 0;
+//	GPIOPinWrite(RC522_PORT, RC522_SCK_PIN, 0);
+//	GPIOPinWrite(RC522_PORT, RC522_CS_PIN, 0);
+//	ucaddress = ((address << 1) & 0x7E) | 0x80;
+//	for (count = 8; count > 0; count--) {
+//		GPIOPinWrite(RC522_PORT, RC522_MOSI_PIN, ((ucaddress & 0x80) == 0x80));
+//		GPIOPinWrite(RC522_PORT, RC522_SCK_PIN, 1);
+//		ucaddress <<= 1;
+//		GPIOPinWrite(RC522_PORT, RC522_SCK_PIN, 0);
+//	}
+//
+//	for (count = 8; count > 0; count--) {
+//		GPIOPinWrite(RC522_PORT, RC522_SCK_PIN, 1);
+//		ucresult <<= 1;
+////		ucResult|= (INT1) input (MFRC522_SO);
+//		ucresult |= GPIOPinRead(RC522_PORT, RC522_MISO_PIN) & 0x01;
+//		GPIOPinWrite(RC522_PORT, RC522_SCK_PIN, 0);
+//	}
+//
+//	GPIOPinWrite(RC522_PORT, RC522_CS_PIN, 1);
+//	GPIOPinWrite(RC522_PORT, RC522_SCK_PIN, 1);
+//	return ucresult;
+//}
+//
+//void RC522Write(uint8_t address, uint8_t value){
+//	uint8_t count, ucaddress;
+//	GPIOPinWrite(RC522_PORT, RC522_SCK_PIN, 0);
+//	GPIOPinWrite(RC522_PORT, RC522_CS_PIN, 0);
+//	ucaddress = ((address << 1) & 0x7E);
+//	for (count = 8; count > 0; count--) {
+//		GPIOPinWrite(RC522_PORT, RC522_MOSI_PIN, ((ucaddress & 0x80) == 0x80));
+//		GPIOPinWrite(RC522_PORT, RC522_SCK_PIN, 1);
+//		ucaddress <<= 1;
+//		GPIOPinWrite(RC522_PORT, RC522_SCK_PIN, 0);
+//	}
+//
+//	for (count = 8; count > 0; count--) {
+//		GPIOPinWrite(RC522_PORT, RC522_MOSI_PIN, ((value & 0x80) == 0x80));
+//		GPIOPinWrite(RC522_PORT, RC522_SCK_PIN, 1);
+//		value <<= 1;
+//		GPIOPinWrite(RC522_PORT, RC522_SCK_PIN, 0);
+//	}
+//	GPIOPinWrite(RC522_PORT, RC522_CS_PIN, 1);
+//	GPIOPinWrite(RC522_PORT, RC522_SCK_PIN, 1);
+//}
+
+void RC522ClearBit(uint32_t address, uint32_t mask){
+	RC522WriteRegister(address, RC522ReadRegister(address) & ~(mask));
+//	uint8_t temp = 0x0;
+//	temp = RC522Read(address);
+//	RC522Write(address, temp & ~mask);
+}
+
+void RC522SetBit(uint32_t address, uint32_t mask){
+	RC522WriteRegister(address, RC522ReadRegister(address) | mask);
+//	uint8_t temp = 0x0;
+//	temp = RC522Read(address);
+//	RC522Write(address, temp | mask);
+}
+
+void RC522AntennaOn(){
+	uint32_t temp;
+
+	temp = RC522ReadRegister(TXCONTROLREG);
+	if (!(temp & 0x00000003)) {
+		RC522SetBit(TXCONTROLREG, 0x00000003);
+	}
+
+//	uint8_t status;
+//	status = RC522Read(TXCONTROLREG);
+//	RC522SetBit(TXCONTROLREG, 0x03);
+}
+
+void RC522AntennaOff(){
+	RC522ClearBit(TXCONTROLREG, 0x00000003);
+}
+
+void RC522Init(){
+	SPIInit();
+	GPIOPinWrite(RC522_PORT, RC522_CS_PIN, 1);
+
+	RC522Write(TMODEREG, 0x80); //Tauto=1; f(Timer) = 6.78MHz/TPreScaler
+	RC522Write(TPRESCALERREG, 0x3E);
+	RC522Write(TRELOADREGL, 30);
+	RC522Write(TRELOADREGH, 0);
+	RC522Write(TXAUTOREG, 0x40); //100% ACK
+	RC522Write(MODEREG, 0x3D); //CRC valor initial 0x6363
+
+	RC522AntennaOff();
+	RC522AntennaOn();
+}
+
+char RC522ToCard(char command, char *DataSend, char datasendlength, char *databack, unsigned *DataBackLength){
+	char _status = MI_ERR;
+	char irqEn = 0x00;
+	char waitIrq = 0x00;
+	char lastbits;
+	char n;
+	unsigned count;
+	switch (command) {
+		case PCD_AUTHENT:
+			irqEn = 0x12;
+			waitIrq = 0x10;
+			break;
+		case PCD_TRANSCEIVE:
+			irqEn = 0x77;
+			waitIrq = 0x30;
+			break;
+		default:
+			break;
+	}
+
+	RC522Write(COMMIENREG, irqEn | 0x80); //Interrupt Request
+	RC522ClearBit(COMMIRQREG, 0x80);
+	RC522SetBit(FIFOLEVELREG, 0x80);
+	RC522Write(COMMANDREG, PCD_IDLE);
+
+	//Writing data to the FIFO
+	for (count = 0; count < datasendlength; count++) {
+		RC522Write(FIFODATAREG, DataSend[count]);
+	}
+	//Execute the command
+	RC522Write(COMMANDREG, command);
+	if (command == PCD_TRANSCEIVE) {
+		RC522SetBit(BITFRAMINGREG, 0x80);
+	}
+	//Waiting to receive data to complete
+	//count according to  the clock frequency adjustment, the operator M1 card maximum waiting time 25ms
+	count = 0xFFFF;
+	do {
+		n = RC522Read(COMMIRQREG);
+		count--;
+	} while (count && !(n & 0x01) && !(n & waitIrq));
+	RC522ClearBit(BITFRAMINGREG, 0x80); //StartSend = 0
+	if (count != 0) {
+		if (!(RC522Read(ERRORREG) & 0x1B)) {
+			_status = MI_OK;
+			if (n & irqEn & 0x01) {
+				_status = MI_NOTAGERR;
+			}
+			if (command == PCD_TRANSCEIVE) {
+				n = RC522Read(FIFOLEVELREG);
+				lastbits = RC522Read(CONTROLREG) & 0x07;
+
+				if (lastbits) {
+					*DataBackLength = (n - 1) * 8 + lastbits;
+				}
+				else {
+					*DataBackLength = n * 8;
+				}
+
+				if (n == 0) {
+					n = 1;
+				}
+				if (n > 16) {
+					n = 16;
+				}
+				//Reading received data in FIFO
+				for (count  = 0; count  < n; count++ ) {
+					databack[count] = RC522Read(FIFODATAREG);
+				}
+
+				databack[count] = 0;
+			}
+		}
+		else {
+			_status = MI_ERR;
+		}
+	}
+	return _status;
+}
+
+char RC522Request(char requestmode, char *TagType){
+	char _status;
+	unsigned backbits;  //The received data bits
+	RC522Write(BITFRAMINGREG, 0x07); //Txlastbits = bitframingreg[2..0]
+	TagType[0] = requestmode;
+	_status = RC522ToCard(PCD_TRANSCEIVE, TagType, 1, TagType, &backbits);
+	if ((_status != MI_OK) || (backbits != 0x10)) {
+		_status = MI_ERR;
+	}
+	return _status;
+}
+
+void RC522CRC(char *DataIn, char length, char *DataOut){
+	char i, n;
+	RC522ClearBit(DIVIRQREG, 0x04);
+	RC522SetBit(FIFOLEVELREG, 0x80);
+
+	for (i = 0; i < length; i++) {
+		RC522Write(FIFODATAREG, *DataIn++);
+	}
+	RC522Write(COMMANDREG, PCD_CALCCRC);
+
+	i = 0xFF;
+	do {
+		n = RC522Read(DIVIRQREG);
+		i --;
+	} while (i &&  !(n & 0x04));
+	DataOut[0] = RC522Read(CRCRESULTREGL);
+	DataOut[1] = RC522Read(CRCRESULTREGM);
+}
+
+char RC522SelectTag(char *SerialNumber){
+	char i;
+	char _status;
+	char size;
+	unsigned receivebits;
+	char buffer[9];
+
+	buffer[0] = PICC_SElECTTAG;
+	buffer[1] = 0x70;
+
+	for (i = 2; i < 7; i++) {
+		buffer[i] = *SerialNumber++;
+	}
+	RC522CRC(buffer, 7, &buffer[7]);
+	_status = RC522ToCard(PCD_TRANSCEIVE, buffer, 9, buffer, &receivebits);
+	if ((_status == MI_OK) && (receivebits == 0x18)) {
+		size = buffer[0];
+	}
+	else {
+		size = 0;
+	}
+	return size;
+}
+
+void RC522Halt(){
+	unsigned unlength;
+	char buffer[4];
+	buffer[0] = PICC_HALT;
+	buffer[1] = 0;
+	RC522CRC(buffer, 2, &buffer[2]);
+	RC522ClearBit(STATUS2REG, 0x80);
+	RC522ToCard(PCD_TRANSCEIVE, buffer, 4, buffer, &unlength);
+	RC522ClearBit(STATUS2REG, 0x08);
+}
+
+char RC522Authentication(char authmode, char blockaddress, char *SectorKey, char *SerialNumber){
+	char _status;
+	unsigned receivebits;
+	char i;
+	char buffer[12];
+
+	//Verify the command block address + sector + password + card serial number
+	buffer[0] = authmode;
+	buffer[1] = blockaddress;
+
+	for (i = 2; i < 8; i++) {
+		buffer[i] = SectorKey[i-2];
+	}
+
+	for (i = 8; i < 12; i++) {
+		buffer[i] = SerialNumber[i-8];
+	}
+
+	_status = RC522ToCard(PCD_AUTHENT, buffer, 12, buffer, &receivebits);
+
+	if ((_status != MI_OK) || !(RC522Read(STATUS2REG) & 0x08)) {
+		_status = MI_ERR;
+	}
+
+	return _status;
+}
+
+char RC522BlockWrite(char blockaddress, char *WriteData){
+	char _status;
+	unsigned receivebits;
+	char i;
+	char buffer[18];
+	buffer[0] = PICC_WRITE;
+	buffer[1] = blockaddress;
+
+	RC522CRC(buffer, 2, &buffer[2]);
+	_status = RC522ToCard(PCD_TRANSCEIVE, buffer, 4, buffer, &receivebits);
+
+	if ((_status != MI_OK) || (receivebits != 4) || ((buffer[0] & 0x0F) != 0x0A)) {
+		_status = MI_ERR;
+	}
+	if (_status == MI_OK) {
+		for (i = 0; i < 16; i++) {
+			buffer[i] = WriteData[i];
+		}
+
+		RC522CRC(buffer, 16, &buffer[16]);
+		_status = RC522ToCard(PCD_TRANSCEIVE, buffer, 18, buffer, &receivebits);
+		if ((_status != MI_OK) || (receivebits != 4) || ((buffer[0] & 0x0F) != 0x0A)) {
+			_status = MI_ERR;
+		}
+	}
+	return _status;
+}
+
+char RC522BlockRead(char blockaddress, char *ReceiveData){
+	char _status;
+	unsigned unlength;
+	ReceiveData[0] = PICC_READ;
+	ReceiveData[1] = blockaddress;
+
+	RC522CRC(ReceiveData, 2, &ReceiveData[2]);
+	_status =RC522ToCard(PCD_TRANSCEIVE, ReceiveData, 4, ReceiveData, &unlength);
+	if ((_status != MI_OK) || (unlength != 0x90)) {
+		_status = MI_ERR;
+	}
+	return _status;
+}
+
+char RC522AntiCollision(char *SerialNumber){
+	char _status;
+	char i;
+	char serialnumbercheck;
+	unsigned unlength;
+	RC522Write(BITFRAMINGREG, 0x00);
+	SerialNumber[0] = PICC_ANTICOLL;
+	SerialNumber[1] = 0x20;
+
+	RC522ClearBit(STATUS2REG, 0x08);
+	_status = RC522ToCard(PCD_TRANSCEIVE, SerialNumber, 2, SerialNumber, &unlength);
+	if (_status == MI_OK) {
+		for (i = 0; i < 4; i++) {
+			serialnumbercheck ^= SerialNumber[i];
+		}
+		if (serialnumbercheck != SerialNumber[4]) {
+			_status = MI_ERR;
+		}
+	}
+	return _status;
+}
+
+char RC522IsCard(char *TagType){
+	if (RC522Request(PICC_REQIDL, TagType) == MI_OK) {
+		return 1;
+	} else {
+		return 0;
+	}
+}
+
+char RC522ReadCardSerial(char *String){
+	char _status;
+	_status = RC522AntiCollision(String);
+	String[5] = 0;
+	if (_status == MI_OK) {
+		return 1;
+	} else {
+		return 0;
+	}
+}

@@ -1,0 +1,1 @@
+"./RC522.obj" "./main.obj" "./tm4c123gh6pm_startup_ccs.obj" "./utils/uartstdio.obj" "./Timer/Timer.obj" "E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/ccs/Debug/driverlib.lib" "../tm4c123gh6pm.cmd" -l"libc.a" 
