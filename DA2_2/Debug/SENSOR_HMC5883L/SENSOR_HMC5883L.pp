@@ -29,12 +29,19 @@ SENSOR_HMC5883L/SENSOR_HMC5883L.obj: E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_in
 SENSOR_HMC5883L/SENSOR_HMC5883L.obj: E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_gpio.h
 SENSOR_HMC5883L/SENSOR_HMC5883L.obj: E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_memmap.h
 SENSOR_HMC5883L/SENSOR_HMC5883L.obj: E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_types.h
+SENSOR_HMC5883L/SENSOR_HMC5883L.obj: E:/ti/TivaWare_C_Series-2.1.4.178/utils/uartstdio.h
+SENSOR_HMC5883L/SENSOR_HMC5883L.obj: C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.2/include/stdarg.h
 SENSOR_HMC5883L/SENSOR_HMC5883L.obj: ../SENSOR_HMC5883L/../define.h
 SENSOR_HMC5883L/SENSOR_HMC5883L.obj: ../SENSOR_HMC5883L/../SystemConfig.h
 SENSOR_HMC5883L/SENSOR_HMC5883L.obj: ../SENSOR_HMC5883L/../Timer/Timer.h
 SENSOR_HMC5883L/SENSOR_HMC5883L.obj: ../SENSOR_HMC5883L/../Button/Button.h
+SENSOR_HMC5883L/SENSOR_HMC5883L.obj: ../SENSOR_HMC5883L/../LineFollow/PID.h
+SENSOR_HMC5883L/SENSOR_HMC5883L.obj: ../SENSOR_HMC5883L/../LineFollow/LineFollow.h
 SENSOR_HMC5883L/SENSOR_HMC5883L.obj: ../SENSOR_HMC5883L/../SENSOR_HMC5883L/SENSOR_HMC5883L.h
+SENSOR_HMC5883L/SENSOR_HMC5883L.obj: ../SENSOR_HMC5883L/../SENSOR_HMC5883L/Kalman.h
+SENSOR_HMC5883L/SENSOR_HMC5883L.obj: C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.2/include/math.h
 SENSOR_HMC5883L/SENSOR_HMC5883L.obj: ../SENSOR_HMC5883L/../SENSOR_HMC5883L/HMC5883LPinMap.h
+SENSOR_HMC5883L/SENSOR_HMC5883L.obj: ../SENSOR_HMC5883L/SENSOR_HMC5883L.h
 
 ../SENSOR_HMC5883L/SENSOR_HMC5883L.c: 
 ../SENSOR_HMC5883L/../include.h: 
@@ -65,9 +72,16 @@ E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_ints.h:
 E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_gpio.h: 
 E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_memmap.h: 
 E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_types.h: 
+E:/ti/TivaWare_C_Series-2.1.4.178/utils/uartstdio.h: 
+C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.2/include/stdarg.h: 
 ../SENSOR_HMC5883L/../define.h: 
 ../SENSOR_HMC5883L/../SystemConfig.h: 
 ../SENSOR_HMC5883L/../Timer/Timer.h: 
 ../SENSOR_HMC5883L/../Button/Button.h: 
+../SENSOR_HMC5883L/../LineFollow/PID.h: 
+../SENSOR_HMC5883L/../LineFollow/LineFollow.h: 
 ../SENSOR_HMC5883L/../SENSOR_HMC5883L/SENSOR_HMC5883L.h: 
+../SENSOR_HMC5883L/../SENSOR_HMC5883L/Kalman.h: 
+C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.2/include/math.h: 
 ../SENSOR_HMC5883L/../SENSOR_HMC5883L/HMC5883LPinMap.h: 
+../SENSOR_HMC5883L/SENSOR_HMC5883L.h: 

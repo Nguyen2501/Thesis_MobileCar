@@ -29,11 +29,17 @@ main.obj: E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_ints.h
 main.obj: E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_gpio.h
 main.obj: E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_memmap.h
 main.obj: E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_types.h
+main.obj: E:/ti/TivaWare_C_Series-2.1.4.178/utils/uartstdio.h
+main.obj: C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.2/include/stdarg.h
 main.obj: ../define.h
 main.obj: ../SystemConfig.h
 main.obj: ../Timer/Timer.h
 main.obj: ../Button/Button.h
+main.obj: ../LineFollow/PID.h
+main.obj: ../LineFollow/LineFollow.h
 main.obj: ../SENSOR_HMC5883L/SENSOR_HMC5883L.h
+main.obj: ../SENSOR_HMC5883L/Kalman.h
+main.obj: C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.2/include/math.h
 main.obj: ../SENSOR_HMC5883L/HMC5883LPinMap.h
 
 ../main.c: 
@@ -65,9 +71,15 @@ E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_ints.h:
 E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_gpio.h: 
 E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_memmap.h: 
 E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_types.h: 
+E:/ti/TivaWare_C_Series-2.1.4.178/utils/uartstdio.h: 
+C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.2/include/stdarg.h: 
 ../define.h: 
 ../SystemConfig.h: 
 ../Timer/Timer.h: 
 ../Button/Button.h: 
+../LineFollow/PID.h: 
+../LineFollow/LineFollow.h: 
 ../SENSOR_HMC5883L/SENSOR_HMC5883L.h: 
+../SENSOR_HMC5883L/Kalman.h: 
+C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.2/include/math.h: 
 ../SENSOR_HMC5883L/HMC5883LPinMap.h: 

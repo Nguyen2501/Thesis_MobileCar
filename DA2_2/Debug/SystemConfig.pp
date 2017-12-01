@@ -29,11 +29,17 @@ SystemConfig.obj: E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_ints.h
 SystemConfig.obj: E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_gpio.h
 SystemConfig.obj: E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_memmap.h
 SystemConfig.obj: E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_types.h
+SystemConfig.obj: E:/ti/TivaWare_C_Series-2.1.4.178/utils/uartstdio.h
+SystemConfig.obj: C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.2/include/stdarg.h
 SystemConfig.obj: ../define.h
 SystemConfig.obj: ../SystemConfig.h
 SystemConfig.obj: ../Timer/Timer.h
 SystemConfig.obj: ../Button/Button.h
+SystemConfig.obj: ../LineFollow/PID.h
+SystemConfig.obj: ../LineFollow/LineFollow.h
 SystemConfig.obj: ../SENSOR_HMC5883L/SENSOR_HMC5883L.h
+SystemConfig.obj: ../SENSOR_HMC5883L/Kalman.h
+SystemConfig.obj: C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.2/include/math.h
 SystemConfig.obj: ../SENSOR_HMC5883L/HMC5883LPinMap.h
 SystemConfig.obj: E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/systick.h
 
@@ -66,10 +72,16 @@ E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_ints.h:
 E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_gpio.h: 
 E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_memmap.h: 
 E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_types.h: 
+E:/ti/TivaWare_C_Series-2.1.4.178/utils/uartstdio.h: 
+C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.2/include/stdarg.h: 
 ../define.h: 
 ../SystemConfig.h: 
 ../Timer/Timer.h: 
 ../Button/Button.h: 
+../LineFollow/PID.h: 
+../LineFollow/LineFollow.h: 
 ../SENSOR_HMC5883L/SENSOR_HMC5883L.h: 
+../SENSOR_HMC5883L/Kalman.h: 
+C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.2/include/math.h: 
 ../SENSOR_HMC5883L/HMC5883LPinMap.h: 
 E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/systick.h: 

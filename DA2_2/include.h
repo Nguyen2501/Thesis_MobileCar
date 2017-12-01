@@ -31,13 +31,17 @@
 #include "inc/hw_gpio.h"
 #include "inc/hw_memmap.h"
 #include "inc/hw_types.h"
+#include "utils/uartstdio.h"
 #include "define.h"
 #include "SystemConfig.h"
 
 #include "Timer/Timer.h"
 #include "Button/Button.h"
+#include "LineFollow/PID.h"
+#include "LineFollow/LineFollow.h"
+
 #include "SENSOR_HMC5883L/SENSOR_HMC5883L.h"
 #include "SENSOR_HMC5883L/HMC5883LPinMap.h"
-
+#include "SENSOR_HMC5883L/Kalman.h"
 
 #endif /* INCLUDE_H_ */

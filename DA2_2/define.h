@@ -45,5 +45,5 @@
 #define SENSOR_PIN_SCL GPIO_PIN_6
 #define SENSOR_PIN_SDA GPIO_PIN_7
 
-
+#define DEFAULT 20000
 #endif /* DEFINE_H_ */

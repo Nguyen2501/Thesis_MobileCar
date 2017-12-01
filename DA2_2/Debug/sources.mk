@@ -109,7 +109,9 @@ S64_DEPS__QUOTED :=
 # Every subdirectory with source files must be described here
 SUBDIRS := \
 . \
+utils \
 Timer \
 SENSOR_HMC5883L \
+LineFollow \
 Button \
 
