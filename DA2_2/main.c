@@ -2,7 +2,8 @@
  * main.c
  */
 #include "include.h"
-
+int i;
+int16_t XaxisRaw, YaxisRaw, ZaxisRaw;
 static bool qei_velocity_timeout[2];
 static int32_t qei_velocity[2] = {0, 0};
 uint32_t Period;
@@ -211,10 +212,13 @@ void main(void) {
 	GPIOPinTypeGPIOOutput(LED_PORT, BLUE_LED | RED_LED | GREEN_LED);
 	GPIOPinWrite(LED_PORT, BLUE_LED | RED_LED | GREEN_LED, 0x00);
 	SysCtlDelay(20000);
-
+	UARTprintf("Hello\n");
 	while(1){
-		UARTprintf("Hello\n");
-		UARTprintf("%3f", headingAngle);
+//		headingAngle = Hmc5883lAzimuth();
+		Hmc5883lMeasurement(&XaxisRaw, &YaxisRaw, &ZaxisRaw);
+//		headingAngle = Hmc5883lAzimuth();
+		i++;
+//		UARTprintf("%d", headingAngle);
 //		int i;
 //		for (i = -20; i < 40; i+=5) {
 //			SetPWMCW(DEFAULT, i);

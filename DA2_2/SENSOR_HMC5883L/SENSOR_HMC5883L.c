@@ -34,11 +34,16 @@ static void I2CInit(void){
 
 	I2CMasterInitExpClk(SENSOR_I2C, SysCtlClockGet(), true);
 	SysCtlDelay(2);
+//	IntEnable(INT_I2C1);
+//
+//	I2CIntRegister(SENSOR_I2C, &Hmc5883lISR);
+//	I2CMasterIntEnableEx(SENSOR_I2C, I2C_MASTER_INT_DATA);
+//	I2CMasterEnable(SENSOR_I2C);
 //	I2CIntRegister(SENSOR_I2C, &Hmc5883lISR);
 //	I2CMasterIntEnable(SENSOR_I2C);
 
-	//Register for compass measurement
-//	Hmc5883lRuntimeout(&Hmc5883lTimertimeout, 10);
+//	Register for compass measurement
+
 }
 
 static uint8_t I2CRead(uint8_t address, uint8_t registerAddress){
@@ -107,14 +112,14 @@ void Hmc5883lInit(void){
 	SysCtlDelay(SysCtlClockGet()/30);
 	I2CWrite(HMC5883L_ADD, HMC5883L_CFG_B, 0x20);
 	SysCtlDelay(SysCtlClockGet()/30);
-	I2CWrite(HMC5883L_ADD, HMC5883L_CFG_A, 0x00);
+	I2CWrite(HMC5883L_ADD, HMC5883L_MODE, 0x00);
 	SysCtlDelay(SysCtlClockGet()/30);
-	KalmanInit(&headingkalman);
+//	KalmanInit(&headingkalman);
+//	headingAngle = Hmc5883lAzimuth();
 	Hmc5883lMeasurement(&xAxixvalue, &yAxixvalue, &zAxixvalue);
-	headingOffset = Hmc5883lCalibration(xAxixvalue, yAxixvalue, zAxixvalue);
-	headingAngle = Hmc5883lAzimuth();
-
-	SetAngle(&headingkalman, headingAngle);
+	Hmc5883lCalibration(xAxixvalue, yAxixvalue, zAxixvalue);
+//	Hmc5883lRuntimeout(&Hmc5883lTimertimeout, 10);
+//	SetAngle(&headingkalman, headingAngle);
 }
 
 void Hmc5883lMeasurement(int16_t *xAxixvalue, int16_t *yAxixvalue, int16_t *zAxixvalue){
@@ -126,25 +131,25 @@ void Hmc5883lMeasurement(int16_t *xAxixvalue, int16_t *yAxixvalue, int16_t *zAxi
 }
 
 float Hmc5883lCalibration(int xAxixvalue, int yAxixvalue, int zAxixvalue){
-	float headingAngle;
-	headingAngle = atan2((float)yAxixvalue, (float)xAxixvalue);
-	headingAngle = (headingAngle * 180) / 3.14 + 180;
-	if ((int) headingAngle < 68) {
-		headingAngle *= 1.3235;
+	float Angle;
+	Angle = atan2((float)yAxixvalue, (float)xAxixvalue);
+	Angle = (Angle * 180) / 3.14 + 180;
+	if ((int) Angle < 68) {
+		Angle *= 1.3235;
 	}
 	else {
-		if ((int) headingAngle < 131) {
-			headingAngle = (headingAngle - 68) * 1.4286 + 90;
+		if ((int) Angle < 131) {
+			Angle = (Angle - 68) * 1.4286 + 90;
 	}
 	 else {
-		if ((int) headingAngle < 231) {
-			headingAngle = (headingAngle - 131) * 0.9 + 180;
+		if ((int) Angle < 231) {
+			Angle = (Angle - 131) * 0.9 + 180;
 		} else {
-			headingAngle = (headingAngle - 231) * 0.69767 + 270;
+			Angle = (Angle - 231) * 0.69767 + 270;
 		}
 	  }
 	}
-	return headingAngle;
+	return Angle;
 }
 
 int Hmc5883lAzimuth(){
