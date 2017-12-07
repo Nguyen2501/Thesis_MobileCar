@@ -30,7 +30,7 @@ void ButtonLeftHandler(void){
 			SysCtlDelay(SysCtlClockGet() / 3);
 			LED1_OFF();
 			system_SetState(SYSTEM_ESTIMATE_MOTOR_MODEL);
-			speed_set(200);
+//			speed_set(10);
 			break;
 		case SYSTEM_ESTIMATE_MOTOR_MODEL:
 			statecount = 3;
@@ -53,7 +53,7 @@ void ButtonLeftHandler(void){
 			break;
 		case SYSTEM_RUN_IMAGE_PROCESSING:
 			statecount = 6;
-			speed_set(200);
+//			speed_set(10);
 			break;
 		default:
 			break;
@@ -68,9 +68,7 @@ void ButtonRightHandler(void){
 		GetValue(calib_white);
 		calib_color = CALIB_BLACK;
 	}
-
 }
-
 
 int main(void){
 	system_SetState(SYSTEM_INITIALIZE);
@@ -83,7 +81,7 @@ int main(void){
     Button_init();
 
 	ButtonRegisterCallback(BUTTON_LEFT, &ButtonLeftHandler);
-	ButtonRegisterCallback(BUTTON_RIGHT, &ButtonRightHandler);
+//	ButtonRegisterCallback(BUTTON_RIGHT, &ButtonRightHandler);
     while(1)
     {
     	system_Process_System_State();

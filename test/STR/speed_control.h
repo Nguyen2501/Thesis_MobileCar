@@ -25,7 +25,7 @@ typedef enum
 
 extern void speed_control_init(void);
 extern void ProcessSpeedControl(void);
-extern void speed_set(int32_t speed);
+void speed_set(MOTOR_SELECT select, int32_t speed);
 extern void StopPWM(uint32_t ulFrequency);
 extern void speed_Enable_Hbridge(bool Enable);
 extern void speed_SetMotorModel(real_T Theta[4]);

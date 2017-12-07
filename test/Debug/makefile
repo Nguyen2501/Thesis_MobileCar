@@ -22,6 +22,8 @@ ORDERED_OBJS += \
 "./STR/rt_nonfinite.obj" \
 "./STR/speed_control.obj" \
 "./QEI/QEI.obj" \
+"./LineFollow/LineFollow.obj" \
+"./LineFollow/PID.obj" \
 "./EEPROM/EEPROM.obj" \
 "./Button/Button.obj" \
 "./ADC/ADC.obj" \
@@ -41,6 +43,7 @@ RMDIR := RMDIR /S/Q
 -include Timer/subdir_vars.mk
 -include STR/subdir_vars.mk
 -include QEI/subdir_vars.mk
+-include LineFollow/subdir_vars.mk
 -include EEPROM/subdir_vars.mk
 -include Button/subdir_vars.mk
 -include ADC/subdir_vars.mk
@@ -48,6 +51,7 @@ RMDIR := RMDIR /S/Q
 -include Timer/subdir_rules.mk
 -include STR/subdir_rules.mk
 -include QEI/subdir_rules.mk
+-include LineFollow/subdir_rules.mk
 -include EEPROM/subdir_rules.mk
 -include Button/subdir_rules.mk
 -include ADC/subdir_rules.mk
@@ -176,8 +180,8 @@ test.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(EXE_OUTPUTS__QUOTED)$(BIN_OUTPUTS__QUOTED)
-	-$(RM) "SystemConfig.pp" "main.pp" "tm4c123gh6pm_startup_ccs.pp" "Timer\Timer.pp" "STR\Control_initialize.pp" "STR\STR_Indirect.pp" "STR\Uocluong.pp" "STR\rtGetInf.pp" "STR\rtGetNaN.pp" "STR\rt_nonfinite.pp" "STR\speed_control.pp" "QEI\QEI.pp" "EEPROM\EEPROM.pp" "Button\Button.pp" "ADC\ADC.pp" 
-	-$(RM) "SystemConfig.obj" "main.obj" "tm4c123gh6pm_startup_ccs.obj" "Timer\Timer.obj" "STR\Control_initialize.obj" "STR\STR_Indirect.obj" "STR\Uocluong.obj" "STR\rtGetInf.obj" "STR\rtGetNaN.obj" "STR\rt_nonfinite.obj" "STR\speed_control.obj" "QEI\QEI.obj" "EEPROM\EEPROM.obj" "Button\Button.obj" "ADC\ADC.obj" 
+	-$(RM) "SystemConfig.pp" "main.pp" "tm4c123gh6pm_startup_ccs.pp" "Timer\Timer.pp" "STR\Control_initialize.pp" "STR\STR_Indirect.pp" "STR\Uocluong.pp" "STR\rtGetInf.pp" "STR\rtGetNaN.pp" "STR\rt_nonfinite.pp" "STR\speed_control.pp" "QEI\QEI.pp" "LineFollow\LineFollow.pp" "LineFollow\PID.pp" "EEPROM\EEPROM.pp" "Button\Button.pp" "ADC\ADC.pp" 
+	-$(RM) "SystemConfig.obj" "main.obj" "tm4c123gh6pm_startup_ccs.obj" "Timer\Timer.obj" "STR\Control_initialize.obj" "STR\STR_Indirect.obj" "STR\Uocluong.obj" "STR\rtGetInf.obj" "STR\rtGetNaN.obj" "STR\rt_nonfinite.obj" "STR\speed_control.obj" "QEI\QEI.obj" "LineFollow\LineFollow.obj" "LineFollow\PID.obj" "EEPROM\EEPROM.obj" "Button\Button.obj" "ADC\ADC.obj" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

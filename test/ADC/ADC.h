@@ -13,5 +13,5 @@
 extern void ADCInit(void);
 extern void IRInit(void);
 extern uint8_t LineState(void);
-
+extern int8_t LineValuePID(uint8_t sensorstate);
 #endif /* ADC_ADC_H_ */

@@ -35,6 +35,8 @@ QEI/QEI.obj: ../QEI/../Timer/Timer.h
 QEI/QEI.obj: ../QEI/../QEI/QEI.h
 QEI/QEI.obj: ../QEI/../Button/Button.h
 QEI/QEI.obj: ../QEI/../ADC/ADC.h
+QEI/QEI.obj: ../QEI/../LineFollow/PID.h
+QEI/QEI.obj: ../QEI/../LineFollow/LineFollow.h
 QEI/QEI.obj: ../QEI/../STR/Uocluong.h
 QEI/QEI.obj: C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/math.h
 QEI/QEI.obj: C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/stdio.h
@@ -93,6 +95,8 @@ E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_types.h:
 ../QEI/../QEI/QEI.h: 
 ../QEI/../Button/Button.h: 
 ../QEI/../ADC/ADC.h: 
+../QEI/../LineFollow/PID.h: 
+../QEI/../LineFollow/LineFollow.h: 
 ../QEI/../STR/Uocluong.h: 
 C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/math.h: 
 C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/stdio.h: 

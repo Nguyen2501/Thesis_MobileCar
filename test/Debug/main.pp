@@ -35,6 +35,8 @@ main.obj: ../Timer/Timer.h
 main.obj: ../QEI/QEI.h
 main.obj: ../Button/Button.h
 main.obj: ../ADC/ADC.h
+main.obj: ../LineFollow/PID.h
+main.obj: ../LineFollow/LineFollow.h
 main.obj: ../STR/Uocluong.h
 main.obj: C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/math.h
 main.obj: C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/stdio.h
@@ -93,6 +95,8 @@ E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_types.h:
 ../QEI/QEI.h: 
 ../Button/Button.h: 
 ../ADC/ADC.h: 
+../LineFollow/PID.h: 
+../LineFollow/LineFollow.h: 
 ../STR/Uocluong.h: 
 C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/math.h: 
 C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/stdio.h: 

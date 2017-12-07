@@ -112,6 +112,7 @@ SUBDIRS := \
 Timer \
 STR \
 QEI \
+LineFollow \
 EEPROM \
 Button \
 ADC \

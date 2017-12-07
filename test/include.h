@@ -33,6 +33,8 @@
 #include "QEI/QEI.h"
 #include "Button/Button.h"
 #include "ADC/ADC.h"
+#include "LineFollow/PID.h"
+#include "LineFollow/LineFollow.h"
 #include "STR/Uocluong.h"
 #include "STR/STR_Indirect.h"
 #include "STR/Control_initialize.h"

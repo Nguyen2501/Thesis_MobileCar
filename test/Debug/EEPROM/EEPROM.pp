@@ -35,6 +35,8 @@ EEPROM/EEPROM.obj: ../EEPROM/../Timer/Timer.h
 EEPROM/EEPROM.obj: ../EEPROM/../QEI/QEI.h
 EEPROM/EEPROM.obj: ../EEPROM/../Button/Button.h
 EEPROM/EEPROM.obj: ../EEPROM/../ADC/ADC.h
+EEPROM/EEPROM.obj: ../EEPROM/../LineFollow/PID.h
+EEPROM/EEPROM.obj: ../EEPROM/../LineFollow/LineFollow.h
 EEPROM/EEPROM.obj: ../EEPROM/../STR/Uocluong.h
 EEPROM/EEPROM.obj: C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/math.h
 EEPROM/EEPROM.obj: C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/stdio.h
@@ -93,6 +95,8 @@ E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_types.h:
 ../EEPROM/../QEI/QEI.h: 
 ../EEPROM/../Button/Button.h: 
 ../EEPROM/../ADC/ADC.h: 
+../EEPROM/../LineFollow/PID.h: 
+../EEPROM/../LineFollow/LineFollow.h: 
 ../EEPROM/../STR/Uocluong.h: 
 C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/math.h: 
 C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/stdio.h: 

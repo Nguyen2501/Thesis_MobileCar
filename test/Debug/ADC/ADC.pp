@@ -35,6 +35,8 @@ ADC/ADC.obj: ../ADC/../Timer/Timer.h
 ADC/ADC.obj: ../ADC/../QEI/QEI.h
 ADC/ADC.obj: ../ADC/../Button/Button.h
 ADC/ADC.obj: ../ADC/../ADC/ADC.h
+ADC/ADC.obj: ../ADC/../LineFollow/PID.h
+ADC/ADC.obj: ../ADC/../LineFollow/LineFollow.h
 ADC/ADC.obj: ../ADC/../STR/Uocluong.h
 ADC/ADC.obj: C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/math.h
 ADC/ADC.obj: C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/stdio.h
@@ -93,6 +95,8 @@ E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_types.h:
 ../ADC/../QEI/QEI.h: 
 ../ADC/../Button/Button.h: 
 ../ADC/../ADC/ADC.h: 
+../ADC/../LineFollow/PID.h: 
+../ADC/../LineFollow/LineFollow.h: 
 ../ADC/../STR/Uocluong.h: 
 C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/math.h: 
 C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/stdio.h: 

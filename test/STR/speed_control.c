@@ -60,15 +60,24 @@ static void Config_PWM(void)
     SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOB);
     GPIOPinConfigure(GPIO_PB2_T3CCP0);
     GPIOPinTypeTimer(GPIO_PORTB_BASE, GPIO_PIN_2);
+    GPIOPinConfigure(GPIO_PB6_T0CCP0);
+    GPIOPinTypeTimer(GPIO_PORTB_BASE, GPIO_PIN_7);
 
 //    Configure timer
     SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER3);
+    SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER0);
 
     TimerConfigure(TIMER3_BASE, TIMER_CFG_SPLIT_PAIR | TIMER_CFG_A_PWM);
     TimerLoadSet(TIMER3_BASE, TIMER_A, DEFAULT);
     TimerMatchSet(TIMER3_BASE, TIMER_A, DEFAULT); // PWM
     TimerControlLevel(TIMER3_BASE, TIMER_A, true);
     TimerEnable(TIMER3_BASE, TIMER_A);
+
+    TimerConfigure(TIMER0_BASE, TIMER_CFG_SPLIT_PAIR | TIMER_CFG_A_PWM);
+    TimerLoadSet(TIMER0_BASE, TIMER_A, DEFAULT);
+    TimerMatchSet(TIMER0_BASE, TIMER_A, DEFAULT); // PWM
+    TimerControlLevel(TIMER0_BASE, TIMER_A, true);
+    TimerEnable(TIMER0_BASE, TIMER_A);
 }
 
 void speed_Enable_Hbridge(bool Enable){
@@ -87,6 +96,7 @@ void SetPWM(uint32_t ulFrequency, int32_t ucDutyCycle)
 		ucDutyCycle = -90;
 	Dutycycle = (100 + ucDutyCycle) * ulPeriod / 200 - 1;
 	TimerMatchSet(TIMER3_BASE, TIMER_A, (100 + ucDutyCycle) * ulPeriod / 200 - 1);
+	TimerMatchSet(TIMER0_BASE, TIMER_A, (100 + ucDutyCycle) * ulPeriod / 200 - 1);
 }
 
 void StopPWM(uint32_t ulFrequency){
@@ -94,6 +104,8 @@ void StopPWM(uint32_t ulFrequency){
 	ulPeriod = SysCtlClockGet() / ulFrequency;
 	TimerLoadSet(TIMER3_BASE, TIMER_A, ulPeriod);
 	TimerMatchSet(TIMER3_BASE, TIMER_A, ulPeriod);
+	TimerLoadSet(TIMER0_BASE, TIMER_A, ulPeriod);
+	TimerMatchSet(TIMER0_BASE, TIMER_A, ulPeriod);
 }
 
 /**
@@ -101,15 +113,23 @@ void StopPWM(uint32_t ulFrequency){
  * @param select motor select
  * @param speed motor speed (encoder pulse / 20ms)
  */
-void speed_set(int32_t speed)
+void speed_set(MOTOR_SELECT select, int32_t speed)
 {
 //	speed_Enable_Hbridge(true);
-
+	if(select == MOTOR_RIGHT){
 		if (SetPoint[0] != speed)
 		{
 			SetPoint[0] = speed;
 			speed_control_runtimeout(20);
 		}
+	}
+	else if(select == MOTOR_LEFT){
+		if (SetPoint[0] != speed)
+		{
+			SetPoint[0] = speed;
+			speed_control_runtimeout(20);
+		}
+	}
 	if (SetPoint[0] == 0)
 	{
 //		SetPWM(DEFAULT, 0);

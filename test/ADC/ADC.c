@@ -10,10 +10,10 @@
 
 static void IRDetectorISR(void);
 static void IRTimerTimeout(void);
-static void irStoptimeout(void);
-static TIMER_ID irRuntimeout(TIMER_CALLBACK_FUNC TimeoutCallback, uint32_t msTime);
+static void IrStoptimeout(void);
+static TIMER_ID IrRuntimeout(TIMER_CALLBACK_FUNC TimeoutCallback, uint32_t msTime);
 
-static TIMER_ID ir_TimerID = INVALID_TIMER_ID;
+static TIMER_ID Ir_TimerID = INVALID_TIMER_ID;
 void GetValue(uint32_t *adc_raw);
 
 uint32_t raw_ADC[7];
@@ -51,7 +51,7 @@ void ADCInit(void){
 #endif
 
 #ifndef USE_TIMER1
-		irRuntimeout(&IRTimerTimeout, 1);
+		IrRuntimeout(&IRTimerTimeout, 1);
 #endif
 }
 
@@ -71,23 +71,56 @@ void GetValue(uint32_t *adc_raw){
 	ADCSequenceDataGet(ADC0_BASE, 0, adc_raw);
 }
 
-//uint8_t LineState(){
-//	uint8_t sensorstate;
-//	int sensorcounter;
-//	ADCIntClear(ADC0_BASE, 0);
-//	ADCProcessorTrigger(ADC0_BASE, 0);
-//	while(!ADCIntStatus(ADC0_BASE, 0, false)){}
-//	ADCSequenceDataGet(ADC0_BASE, 0, raw_ADC);
-//
-//	for (sensorcounter = 0; sensorcounter < 7; sensorcounter++) {
-//		if (raw_ADC[sensorcounter] < (calib_white[sensorcounter] - DELTA)) {
-//			sensorstate |= 1 << sensorcounter;  //Black
-//		} else {
-//			sensorstate &= ~(1 << sensorcounter);  //White
-//		}
-//	}
-//	return sensorstate;
-//}
+uint8_t LineState(){
+	uint8_t sensorstate;
+	int sensorcounter;
+	ADCIntClear(ADC0_BASE, 0);
+	ADCProcessorTrigger(ADC0_BASE, 0);
+	while(!ADCIntStatus(ADC0_BASE, 0, false)){}
+	ADCSequenceDataGet(ADC0_BASE, 0, raw_ADC);
+
+	for (sensorcounter = 0; sensorcounter < 7; sensorcounter++) {
+		if (raw_ADC[sensorcounter] < (calib_white[sensorcounter] - DELTA)) {
+			sensorstate |= 1 << sensorcounter;  //Black
+		} else {
+			sensorstate &= ~(1 << sensorcounter);  //White
+		}
+	}
+	return sensorstate;
+}
+
+int8_t LineValuePID(uint8_t sensorstate){
+	switch (sensorstate) {
+		case 0x40:
+			return -6;
+		case 0x60:
+			return -5;
+		case 0x20:
+			return -4;
+		case 0x30:
+			return -3;
+		case 0x10:
+			return -2;
+		case 0x18:
+			return -1;
+		case 0x08:
+			return 0;
+		case 0x0D:
+			return 1;
+		case 0x04:
+			return 2;
+		case 0x06:
+			return 3;
+		case 0x02:
+			return 4;
+		case 0x03:
+			return 5;
+		case 0x01:
+			return 6;
+		default:
+			return 0;
+	}
+}
 
 static void IRDetectorISR(void){
 //	volatile uint32_t ADCResult[7];
@@ -105,7 +138,7 @@ static void IRDetectorISR(void){
 			}
 		}
 #ifndef USE_TIMER1
-	irRuntimeout(&IRTimerTimeout, 1);
+		IrRuntimeout(&IRTimerTimeout, 1);
 #endif
 }
 
@@ -113,17 +146,17 @@ static void IRTimerTimeout(void){
 #ifdef USE_TIMER1
 	TimerIntClear(TIMER1_BASE, TIMER_TIMA_TIMEOUT);
 #endif
-	ir_TimerID = INVALID_TIMER_ID;
+	Ir_TimerID = INVALID_TIMER_ID;
 }
-static void irStoptimeout(void){
-	if (ir_TimerID != INVALID_TIMER_ID) {
-		TIMER_UnregisterEvent(ir_TimerID);
-	ir_TimerID = INVALID_TIMER_ID;
+static void IrStoptimeout(void){
+	if (Ir_TimerID != INVALID_TIMER_ID) {
+		TIMER_UnregisterEvent(Ir_TimerID);
+		Ir_TimerID = INVALID_TIMER_ID;
 	}
 }
 
-static TIMER_ID irRuntimeout(TIMER_CALLBACK_FUNC TimeoutCallback, uint32_t msTime){
-	irStoptimeout();
-	ir_TimerID = TIMER_RegisterEvent(TimeoutCallback, msTime);
-	return ir_TimerID;
+static TIMER_ID IrRuntimeout(TIMER_CALLBACK_FUNC TimeoutCallback, uint32_t msTime){
+	IrStoptimeout();
+	Ir_TimerID = TIMER_RegisterEvent(TimeoutCallback, msTime);
+	return Ir_TimerID;
 }

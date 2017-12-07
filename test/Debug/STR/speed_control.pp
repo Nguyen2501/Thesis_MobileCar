@@ -35,6 +35,8 @@ STR/speed_control.obj: ../STR/../Timer/Timer.h
 STR/speed_control.obj: ../STR/../QEI/QEI.h
 STR/speed_control.obj: ../STR/../Button/Button.h
 STR/speed_control.obj: ../STR/../ADC/ADC.h
+STR/speed_control.obj: ../STR/../LineFollow/PID.h
+STR/speed_control.obj: ../STR/../LineFollow/LineFollow.h
 STR/speed_control.obj: ../STR/../STR/Uocluong.h
 STR/speed_control.obj: C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/math.h
 STR/speed_control.obj: C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/stdio.h
@@ -93,6 +95,8 @@ E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_types.h:
 ../STR/../QEI/QEI.h: 
 ../STR/../Button/Button.h: 
 ../STR/../ADC/ADC.h: 
+../STR/../LineFollow/PID.h: 
+../STR/../LineFollow/LineFollow.h: 
 ../STR/../STR/Uocluong.h: 
 C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/math.h: 
 C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/stdio.h: 
