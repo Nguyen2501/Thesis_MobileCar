@@ -11,6 +11,7 @@
 static void PIDProcessCallback(void);
 static void PIDStopTimeout(void);
 static TIMER_ID PIDRuntimeout(TIMER_CALLBACK_FUNC CallbackFcn, uint32_t msTime);
+static void PIDLineFollowProcess();
 static bool TurnLeft(int forwardpulse, int averagespeedleft, int averagespeedright, int turnpulse, int forwardpulse2);
 static bool TurnRight(int forwardpulse, int averagespeedleft, int averagespeedright, int turnpulse, int forwardpulse2);
 
@@ -29,7 +30,7 @@ static void PIDLineFollowInit(){
 //
 //}
 
-static bool PIDLineFollow();
+//static bool PIDLineFollow();
 
 static void PIDLineFollowProcess(){
 	pidTimerID = INVALID_TIMER_ID;

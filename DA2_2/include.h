@@ -37,6 +37,7 @@
 
 #include "Timer/Timer.h"
 #include "Button/Button.h"
+#include "ADC/ADC.h"
 #include "LineFollow/PID.h"
 #include "LineFollow/LineFollow.h"
 

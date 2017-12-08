@@ -65,19 +65,29 @@ static void Config_PWM(void)
 
 //    Configure timer
     SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER3);
-    SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER0);
 
-    TimerConfigure(TIMER3_BASE, TIMER_CFG_SPLIT_PAIR | TIMER_CFG_A_PWM);
+    TimerConfigure(TIMER3_BASE, TIMER_CFG_SPLIT_PAIR | TIMER_CFG_A_PWM | TIMER_CFG_B_PWM);
     TimerLoadSet(TIMER3_BASE, TIMER_A, DEFAULT);
     TimerMatchSet(TIMER3_BASE, TIMER_A, DEFAULT); // PWM
     TimerControlLevel(TIMER3_BASE, TIMER_A, true);
     TimerEnable(TIMER3_BASE, TIMER_A);
 
-    TimerConfigure(TIMER0_BASE, TIMER_CFG_SPLIT_PAIR | TIMER_CFG_A_PWM);
+    TimerLoadSet(TIMER3_BASE, TIMER_B, DEFAULT);
+    TimerMatchSet(TIMER3_BASE, TIMER_B, DEFAULT); // PWM
+    TimerControlLevel(TIMER3_BASE, TIMER_B, true);
+    TimerEnable(TIMER3_BASE, TIMER_B);
+
+    SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER0);
+    TimerConfigure(TIMER0_BASE, TIMER_CFG_SPLIT_PAIR | TIMER_CFG_A_PWM | TIMER_CFG_B_PWM);
     TimerLoadSet(TIMER0_BASE, TIMER_A, DEFAULT);
     TimerMatchSet(TIMER0_BASE, TIMER_A, DEFAULT); // PWM
     TimerControlLevel(TIMER0_BASE, TIMER_A, true);
     TimerEnable(TIMER0_BASE, TIMER_A);
+
+    TimerLoadSet(TIMER0_BASE, TIMER_B, DEFAULT);
+    TimerMatchSet(TIMER0_BASE, TIMER_B, DEFAULT); // PWM
+    TimerControlLevel(TIMER0_BASE, TIMER_B, true);
+    TimerEnable(TIMER0_BASE, TIMER_B);
 }
 
 void speed_Enable_Hbridge(bool Enable){

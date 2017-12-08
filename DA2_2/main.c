@@ -9,10 +9,12 @@ static int32_t qei_velocity[2] = {0, 0};
 uint32_t Period;
 int32_t Velocity[2] = {0, 0};
 int32_t Dutycycle;
+uint32_t raw_ADC_value[7];
 extern int headingAngle;
 extern float headingOffset;
 extern Kalman headingkalman;
 
+extern void GetValue(uint32_t *adc_raw);
 static void QEI0_VelocityIsr(void);
 static void QEI1_VelocityIsr(void);
 
@@ -206,6 +208,7 @@ void main(void) {
 //	Config_PWM();
 	LedInit();
 	ConfigUART();
+	ADCInit();
 //	ConfigButton();
 	Hmc5883lInit();
 	SysCtlPeripheralEnable(LED_PERIPHERAL);
@@ -214,16 +217,9 @@ void main(void) {
 	SysCtlDelay(20000);
 	UARTprintf("Hello\n");
 	while(1){
-//		headingAngle = Hmc5883lAzimuth();
-		Hmc5883lMeasurement(&XaxisRaw, &YaxisRaw, &ZaxisRaw);
-//		headingAngle = Hmc5883lAzimuth();
-		i++;
-//		UARTprintf("%d", headingAngle);
-//		int i;
-//		for (i = -20; i < 40; i+=5) {
-//			SetPWMCW(DEFAULT, i);
-//			SysCtlDelay(SysCtlClockGet() / 3);
-//		}
+		GetValue(raw_ADC_value);
+//		Hmc5883lMeasurement(&XaxisRaw, &YaxisRaw, &ZaxisRaw);
+		headingAngle = Hmc5883lAzimuth();
 	}
 }
 

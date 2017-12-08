@@ -20,6 +20,7 @@ ORDERED_OBJS += \
 "./LineFollow/LineFollow.obj" \
 "./LineFollow/PID.obj" \
 "./Button/Button.obj" \
+"./ADC/ADC.obj" \
 "E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/ccs/Debug/driverlib.lib" \
 "../tm4c123gh6pm.cmd" \
 $(GEN_CMDS__FLAG) \
@@ -39,12 +40,14 @@ RMDIR := RMDIR /S/Q
 -include SENSOR_HMC5883L/subdir_vars.mk
 -include LineFollow/subdir_vars.mk
 -include Button/subdir_vars.mk
+-include ADC/subdir_vars.mk
 -include subdir_rules.mk
 -include utils/subdir_rules.mk
 -include Timer/subdir_rules.mk
 -include SENSOR_HMC5883L/subdir_rules.mk
 -include LineFollow/subdir_rules.mk
 -include Button/subdir_rules.mk
+-include ADC/subdir_rules.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
@@ -170,8 +173,8 @@ DA2_2.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(EXE_OUTPUTS__QUOTED)$(BIN_OUTPUTS__QUOTED)
-	-$(RM) "SystemConfig.pp" "main.pp" "tm4c123gh6pm_startup_ccs.pp" "utils\uartstdio.pp" "Timer\Timer.pp" "SENSOR_HMC5883L\Kalman.pp" "SENSOR_HMC5883L\SENSOR_HMC5883L.pp" "LineFollow\LineFollow.pp" "LineFollow\PID.pp" "Button\Button.pp" 
-	-$(RM) "SystemConfig.obj" "main.obj" "tm4c123gh6pm_startup_ccs.obj" "utils\uartstdio.obj" "Timer\Timer.obj" "SENSOR_HMC5883L\Kalman.obj" "SENSOR_HMC5883L\SENSOR_HMC5883L.obj" "LineFollow\LineFollow.obj" "LineFollow\PID.obj" "Button\Button.obj" 
+	-$(RM) "SystemConfig.pp" "main.pp" "tm4c123gh6pm_startup_ccs.pp" "utils\uartstdio.pp" "Timer\Timer.pp" "SENSOR_HMC5883L\Kalman.pp" "SENSOR_HMC5883L\SENSOR_HMC5883L.pp" "LineFollow\LineFollow.pp" "LineFollow\PID.pp" "Button\Button.pp" "ADC\ADC.pp" 
+	-$(RM) "SystemConfig.obj" "main.obj" "tm4c123gh6pm_startup_ccs.obj" "utils\uartstdio.obj" "Timer\Timer.obj" "SENSOR_HMC5883L\Kalman.obj" "SENSOR_HMC5883L\SENSOR_HMC5883L.obj" "LineFollow\LineFollow.obj" "LineFollow\PID.obj" "Button\Button.obj" "ADC\ADC.obj" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

@@ -35,6 +35,7 @@ LineFollow/PID.obj: ../LineFollow/../define.h
 LineFollow/PID.obj: ../LineFollow/../SystemConfig.h
 LineFollow/PID.obj: ../LineFollow/../Timer/Timer.h
 LineFollow/PID.obj: ../LineFollow/../Button/Button.h
+LineFollow/PID.obj: ../LineFollow/../ADC/ADC.h
 LineFollow/PID.obj: ../LineFollow/../LineFollow/PID.h
 LineFollow/PID.obj: ../LineFollow/../LineFollow/LineFollow.h
 LineFollow/PID.obj: ../LineFollow/../SENSOR_HMC5883L/SENSOR_HMC5883L.h
@@ -77,6 +78,7 @@ C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.2/include/stdarg.h:
 ../LineFollow/../SystemConfig.h: 
 ../LineFollow/../Timer/Timer.h: 
 ../LineFollow/../Button/Button.h: 
+../LineFollow/../ADC/ADC.h: 
 ../LineFollow/../LineFollow/PID.h: 
 ../LineFollow/../LineFollow/LineFollow.h: 
 ../LineFollow/../SENSOR_HMC5883L/SENSOR_HMC5883L.h: 

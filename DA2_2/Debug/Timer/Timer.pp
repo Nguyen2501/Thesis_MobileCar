@@ -35,6 +35,7 @@ Timer/Timer.obj: ../Timer/../define.h
 Timer/Timer.obj: ../Timer/../SystemConfig.h
 Timer/Timer.obj: ../Timer/../Timer/Timer.h
 Timer/Timer.obj: ../Timer/../Button/Button.h
+Timer/Timer.obj: ../Timer/../ADC/ADC.h
 Timer/Timer.obj: ../Timer/../LineFollow/PID.h
 Timer/Timer.obj: ../Timer/../LineFollow/LineFollow.h
 Timer/Timer.obj: ../Timer/../SENSOR_HMC5883L/SENSOR_HMC5883L.h
@@ -77,6 +78,7 @@ C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.2/include/stdarg.h:
 ../Timer/../SystemConfig.h: 
 ../Timer/../Timer/Timer.h: 
 ../Timer/../Button/Button.h: 
+../Timer/../ADC/ADC.h: 
 ../Timer/../LineFollow/PID.h: 
 ../Timer/../LineFollow/LineFollow.h: 
 ../Timer/../SENSOR_HMC5883L/SENSOR_HMC5883L.h: 

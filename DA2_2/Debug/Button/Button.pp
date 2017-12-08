@@ -35,6 +35,7 @@ Button/Button.obj: ../Button/../define.h
 Button/Button.obj: ../Button/../SystemConfig.h
 Button/Button.obj: ../Button/../Timer/Timer.h
 Button/Button.obj: ../Button/../Button/Button.h
+Button/Button.obj: ../Button/../ADC/ADC.h
 Button/Button.obj: ../Button/../LineFollow/PID.h
 Button/Button.obj: ../Button/../LineFollow/LineFollow.h
 Button/Button.obj: ../Button/../SENSOR_HMC5883L/SENSOR_HMC5883L.h
@@ -77,6 +78,7 @@ C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.2/include/stdarg.h:
 ../Button/../SystemConfig.h: 
 ../Button/../Timer/Timer.h: 
 ../Button/../Button/Button.h: 
+../Button/../ADC/ADC.h: 
 ../Button/../LineFollow/PID.h: 
 ../Button/../LineFollow/LineFollow.h: 
 ../Button/../SENSOR_HMC5883L/SENSOR_HMC5883L.h: 

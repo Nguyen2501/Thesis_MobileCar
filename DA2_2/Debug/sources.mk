@@ -114,4 +114,5 @@ Timer \
 SENSOR_HMC5883L \
 LineFollow \
 Button \
+ADC \
 

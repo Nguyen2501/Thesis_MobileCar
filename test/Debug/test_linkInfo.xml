@@ -2,7 +2,7 @@
 <link_info>
    <banner>TI ARM Linker PC v5.2.9</banner>
    <copyright>Copyright (c) 1996-2017 Texas Instruments Incorporated</copyright>
-   <link_time>0x5a298daf</link_time>
+   <link_time>0x5a2a67a4</link_time>
    <link_errors>0x0</link_errors>
    <output_file>test.out</output_file>
    <entry_point>

@@ -24,6 +24,6 @@ typedef enum{
 } DIRECTION;
 
 extern void LineFollowInit();
-extern void PIDLineFollowProcess();
+//extern void PIDLineFollowProcess();
 bool move(int posleft, int posright, int velleftmax, int velrightmax);
 #endif /* LINEFOLLOW_LINEFOLLOW_H_ */

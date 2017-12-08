@@ -114,12 +114,12 @@ void Hmc5883lInit(void){
 	SysCtlDelay(SysCtlClockGet()/30);
 	I2CWrite(HMC5883L_ADD, HMC5883L_MODE, 0x00);
 	SysCtlDelay(SysCtlClockGet()/30);
-//	KalmanInit(&headingkalman);
+	KalmanInit(&headingkalman);
 //	headingAngle = Hmc5883lAzimuth();
 	Hmc5883lMeasurement(&xAxixvalue, &yAxixvalue, &zAxixvalue);
 	Hmc5883lCalibration(xAxixvalue, yAxixvalue, zAxixvalue);
-//	Hmc5883lRuntimeout(&Hmc5883lTimertimeout, 10);
-//	SetAngle(&headingkalman, headingAngle);
+	Hmc5883lRuntimeout(&Hmc5883lTimertimeout, 10);
+	SetAngle(&headingkalman, headingAngle);
 }
 
 void Hmc5883lMeasurement(int16_t *xAxixvalue, int16_t *yAxixvalue, int16_t *zAxixvalue){
