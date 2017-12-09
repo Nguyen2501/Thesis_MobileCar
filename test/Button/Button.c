@@ -35,7 +35,7 @@ static TIMER_ID button_TimerID = INVALID_TIMER_ID;
  * @brief Button init
  */
 
-void Button_init(void)
+void ButtonInit(void)
 {
 	SysCtlPeripheralEnable(SYSCTL_PERIPH_BUTTON);
 	HWREG(GPIO_PORTF_BASE + GPIO_O_LOCK) = GPIO_LOCK_KEY;

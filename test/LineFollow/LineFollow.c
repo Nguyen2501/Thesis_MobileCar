@@ -8,13 +8,19 @@
 #include "../include.h"
 #include "LineFollow.h"
 
+#define AVG_SPEED_FORWARD_FAST 30
+#define AVG_SPEED_FORWARD 20
+#define AVG_SPEED_FORWARD_SLOW 10
+#define AVG_SPEED_FORWARD_BACKWARD 30
+
 static void PIDProcessCallback(void);
 static void PIDStopTimeout(void);
 static TIMER_ID PIDRuntimeout(TIMER_CALLBACK_FUNC CallbackFcn, uint32_t msTime);
 //static bool TurnLeft(int forwardpulse, int averagespeedleft, int averagespeedright, int turnpulse, int forwardpulse2);
 //static bool TurnRight(int forwardpulse, int averagespeedleft, int averagespeedright, int turnpulse, int forwardpulse2);
+//static bool Forward(int averagespeedleft, int averagespeedright);
+static bool Forward();
 static bool TurnBack(int forwardpulse, int averagespeedleft, int averagespeedright, int turnpulse);
-static bool Forward(int averagespeedleft, int averagespeedright);
 static bool TurnLeft(int forwardpulse, int averagespeedleft, int averagespeedright, int turnpulse);
 static bool TurnRight(int forwardpulse, int averagespeedleft, int averagespeedright, int turnpulse);
 
@@ -22,7 +28,7 @@ static int32_T AverageSpeed, AverageSpeedTemp;
 static int32_t ControlStep = 1;
 static uint32_t ui32msLoop = 0;
 static TIMER_ID pidTimerID = INVALID_TIMER_ID;
-
+static bool checkforward = false;
 PID_PARAMETERS pidlinefollow = {.Kp = 0, .Kd = 0, .Ki = 0, .Ts = 0.020, .Saturation = 300, .e_ = 0, .e__ = 0, .u_ = 0};
 
 static void PIDLineFollowInit(){
@@ -32,7 +38,7 @@ static void PIDLineFollowInit(){
 
 void LineFollowInit(){
 	PIDLineFollowInit();
-//	AverageSpeed
+	AverageSpeed = AVG_SPEED_FORWARD_SLOW;
 }
 
 static bool PIDLineFollow(float averagespeed){
@@ -68,14 +74,19 @@ static TIMER_ID PIDRuntimeout(TIMER_CALLBACK_FUNC CallbackFcn, uint32_t msTime){
 	return pidTimerID;
 }
 
-static bool Forward(int averagespeedleft, int averagespeedright){
-	switch (ControlStep) {
-		case 1:
-			ControlStep++;
-			ControlStep = 1;
-		break;
-	}
-	return false;
+static bool Forward(){
+	LED1_OFF();
+	LED2_ON();
+	LED3_OFF();
+	AverageSpeed = AVG_SPEED_FORWARD_SLOW;
+	PIDLineFollow(AverageSpeed);
+//	switch (ControlStep) {
+//		case 1:
+//			ControlStep++;
+//			ControlStep = 1;
+//		break;
+//	}
+	return true;
 }
 static bool TurnRight(int forwardpulse, int averagespeedleft, int averagespeedright, int turnpulse){
 	switch (ControlStep) {
@@ -106,6 +117,6 @@ static bool TurnBack(int forwardpulse, int averagespeedleft, int averagespeedrig
 }
 
 void PIDLineFollowProcess(){
-	PIDRuntimeout(&PIDLineFollowProcess, ui32msLoop);
-
+	PIDRuntimeout(&PIDProcessCallback, ui32msLoop);
+	checkforward = Forward();
 }

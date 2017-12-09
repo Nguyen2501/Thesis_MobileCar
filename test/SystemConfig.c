@@ -23,7 +23,7 @@ uint32_t u32_UsrSystemClockGet()
 	return systemClock;
 }
 
-void Config_System(void){
+void ConfigSystem(void){
 	SysCtlClockSet(SYSCTL_SYSDIV_2_5 | SYSCTL_USE_PLL | SYSCTL_XTAL_16MHZ | SYSCTL_OSC_MAIN);
 	FPUEnable();
 	FPULazyStackingEnable();
@@ -55,19 +55,19 @@ void LEDDisplayInit(void){
 	LED3_OFF();
 }
 
-SYSTEM_STATE system_GetState(void)
+SYSTEM_STATE SystemGetState(void)
 {
 	return e_SystemState;
 }
 
-void system_SetState(SYSTEM_STATE SysState)
+void SystemSetState(SYSTEM_STATE SysState)
 {
 	e_SystemState = SysState;
 }
 
 void system_Process_System_State(void)
 {
-	switch (system_GetState())
+	switch (SystemGetState())
 	{
 		case SYSTEM_POWER_UP:
 			break;
@@ -89,6 +89,7 @@ void system_Process_System_State(void)
 			break;
 		case SYSTEM_RUN_IMAGE_PROCESSING:
 			LED1_ON();
+			PIDLineFollowProcess();
 			ProcessSpeedControl();
 			break;
 		case SYSTEM_ERROR:

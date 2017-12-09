@@ -6,14 +6,17 @@
  */
 #include "../include.h"
 #include "ADC.h"
-#define USE_TIMER1
+
+//#define USE_TIMER1
+#define BLACK	400
+#define WHITE	300
 
 static void IRDetectorISR(void);
-static void IRTimerTimeout(void);
-static void IrStoptimeout(void);
-static TIMER_ID IrRuntimeout(TIMER_CALLBACK_FUNC TimeoutCallback, uint32_t msTime);
-
-static TIMER_ID Ir_TimerID = INVALID_TIMER_ID;
+//static void IRTimerTimeout(void);
+//static void IrStoptimeout(void);
+//static TIMER_ID IrRuntimeout(TIMER_CALLBACK_FUNC TimeoutCallback, uint32_t msTime);
+//
+//static TIMER_ID Ir_TimerID = INVALID_TIMER_ID;
 void GetValue(uint32_t *adc_raw);
 
 uint32_t raw_ADC[7];
@@ -36,33 +39,33 @@ void ADCInit(void){
 		ADCSequenceStepConfigure(ADC0_BASE, 0, 6, ADC_CTL_CH7 | ADC_CTL_IE | ADC_CTL_END);
 
 		ADCSequenceEnable(ADC0_BASE, 0);
-		ADCIntRegister(ADC0_BASE, 0, &IRDetectorISR);
-		ADCIntEnable(ADC0_BASE, 0);
+//		ADCIntRegister(ADC0_BASE, 0, &IRDetectorISR);
+//		ADCIntEnable(ADC0_BASE, 0);
+//
+//#ifdef USE_TIMER1
+//		SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER1);
+//		TimerConfigure(TIMER1_BASE, TIMER_CFG_PERIODIC);
+//		TimerLoadSet(TIMER1_BASE, TIMER_A, SysCtlClockGet() / 1000);
+//		TimerIntRegister(TIMER1_BASE, TIMER_A, &IRTimerTimeout);
+//		IntEnable(INT_TIMER1A);
+//		TimerIntEnable(TIMER1_BASE, TIMER_TIMA_TIMEOUT);
+//		TimerIntClear(TIMER1_BASE, TIMER_TIMA_TIMEOUT);
+//		TimerEnable(TIMER1_BASE, TIMER_A);
+//#endif
 
-#ifdef USE_TIMER1
-		SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER1);
-		TimerConfigure(TIMER1_BASE, TIMER_CFG_PERIODIC);
-		TimerLoadSet(TIMER1_BASE, TIMER_A, SysCtlClockGet() / 1000);
-		TimerIntRegister(TIMER1_BASE, TIMER_A, &IRTimerTimeout);
-		IntEnable(INT_TIMER1A);
-		TimerIntEnable(TIMER1_BASE, TIMER_TIMA_TIMEOUT);
-		TimerIntClear(TIMER1_BASE, TIMER_TIMA_TIMEOUT);
-		TimerEnable(TIMER1_BASE, TIMER_A);
-#endif
-
-#ifndef USE_TIMER1
-		IrRuntimeout(&IRTimerTimeout, 1);
-#endif
+//#ifndef USE_TIMER1
+//		IrRuntimeout(&IRTimerTimeout, 1);
+//#endif
 }
 
-void IRInit(void){
-	SysCtlPeripheralEnable(ADC0_BASE);
-	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOD);
-	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOE);
-
-	GPIOPinTypeADC(GPIO_PORTD_BASE, GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3);
-	GPIOPinTypeADC(GPIO_PORTE_BASE, GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_5);
-}
+//void IRInit(void){
+//	SysCtlPeripheralEnable(ADC0_BASE);
+//	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOD);
+//	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOE);
+//
+//	GPIOPinTypeADC(GPIO_PORTD_BASE, GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3);
+//	GPIOPinTypeADC(GPIO_PORTE_BASE, GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_5);
+//}
 
 void GetValue(uint32_t *adc_raw){
 	ADCIntClear(ADC0_BASE, 0);
@@ -80,12 +83,13 @@ uint8_t LineState(){
 	ADCSequenceDataGet(ADC0_BASE, 0, raw_ADC);
 
 	for (sensorcounter = 0; sensorcounter < 7; sensorcounter++) {
-		if (raw_ADC[sensorcounter] < (calib_white[sensorcounter] - DELTA)) {
-			sensorstate |= 1 << sensorcounter;  //Black
+		if (raw_ADC[sensorcounter] > BLACK) {
+			sensorstate |= 1 << (6 - sensorcounter);  //Black
 		} else {
-			sensorstate &= ~(1 << sensorcounter);  //White
+			sensorstate &= ~(1 << (6 - sensorcounter));  //White
 		}
 	}
+	sensorstate &= 0x7f;
 	return sensorstate;
 }
 
@@ -137,26 +141,26 @@ static void IRDetectorISR(void){
 				sensorstate &= ~(1 << sensorcounter);  //White
 			}
 		}
-#ifndef USE_TIMER1
-		IrRuntimeout(&IRTimerTimeout, 1);
-#endif
+//#ifndef USE_TIMER1
+//		IrRuntimeout(&IRTimerTimeout, 1);
+//#endif
 }
-
-static void IRTimerTimeout(void){
-#ifdef USE_TIMER1
-	TimerIntClear(TIMER1_BASE, TIMER_TIMA_TIMEOUT);
-#endif
-	Ir_TimerID = INVALID_TIMER_ID;
-}
-static void IrStoptimeout(void){
-	if (Ir_TimerID != INVALID_TIMER_ID) {
-		TIMER_UnregisterEvent(Ir_TimerID);
-		Ir_TimerID = INVALID_TIMER_ID;
-	}
-}
-
-static TIMER_ID IrRuntimeout(TIMER_CALLBACK_FUNC TimeoutCallback, uint32_t msTime){
-	IrStoptimeout();
-	Ir_TimerID = TIMER_RegisterEvent(TimeoutCallback, msTime);
-	return Ir_TimerID;
-}
+//
+//static void IRTimerTimeout(void){
+//#ifdef USE_TIMER1
+//	TimerIntClear(TIMER1_BASE, TIMER_TIMA_TIMEOUT);
+//#endif
+//	Ir_TimerID = INVALID_TIMER_ID;
+//}
+//static void IrStoptimeout(void){
+//	if (Ir_TimerID != INVALID_TIMER_ID) {
+//		TIMER_UnregisterEvent(Ir_TimerID);
+//		Ir_TimerID = INVALID_TIMER_ID;
+//	}
+//}
+//
+//static TIMER_ID IrRuntimeout(TIMER_CALLBACK_FUNC TimeoutCallback, uint32_t msTime){
+//	IrStoptimeout();
+//	Ir_TimerID = TIMER_RegisterEvent(TimeoutCallback, msTime);
+//	return Ir_TimerID;
+//}

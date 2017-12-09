@@ -43,10 +43,10 @@ typedef enum{
 	SYSTEM_ERROR
 } SYSTEM_STATE;
 
-extern void Config_System(void);
+extern void ConfigSystem(void);
 extern void LEDDisplayInit(void);
-extern SYSTEM_STATE system_GetState(void);
-extern void system_SetState(SYSTEM_STATE SysState);
+extern SYSTEM_STATE SystemGetState(void);
+extern void SystemSetState(SYSTEM_STATE SysState);
 extern void system_Process_System_State(void);
 extern uint32_t u32_UsrSystemClockGet();
 #endif /* SYSTEMCONFIG_H_ */

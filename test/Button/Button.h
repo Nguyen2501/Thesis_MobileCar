@@ -23,7 +23,7 @@ typedef enum
 	BUTTON_RIGHT
 } BUTTON_TYPE;
 
-extern void Button_init(void);
+extern void ButtonInit(void);
 extern bool ButtonRegisterCallback(BUTTON_TYPE ButtonSelect, void (*ButtonCallback)());
 
 #endif /* BUTTON_BUTTON_H_ */

@@ -1,8 +1,12 @@
 #include "include.h"
 
-extern void SetPWM(uint32_t ulFrequency, int32_t ucDutyCycle);
+extern void SetPWMCCW_LeftMotor(uint32_t ulFrequency, int32_t ucDutyCycle);
+extern void SetPWMCW_LeftMotor(uint32_t ulFrequency, int32_t ucDutyCycle);
+extern void SetPWMCCW_RightMotor(uint32_t ulFrequency, int32_t ucDutyCycle);
+extern void SetPWMCW_RightMotor(uint32_t ulFrequency, int32_t ucDutyCycle);
 extern void GetValue(uint32_t *adc_raw);
 
+extern int32_t Vel[2];
 extern float udkmain;
 extern uint32_t Period;
 extern int32_t Dutycycle;
@@ -15,22 +19,25 @@ enum calib_color{
 }calib_color;
 
 void ButtonLeftHandler(void){
-	switch (system_GetState()) {
+	switch (SystemGetState()) {
 		case SYSTEM_INITIALIZE:
 			statecount = 1;
 			LED2_ON();
 			SysCtlDelay(SysCtlClockGet() / 3);
 			LED2_OFF();
-			StopPWM(DEFAULT);
-			system_SetState(SYSTEM_GET_MOTOR_MODEL);
+//			SetPWMCW_LeftMotor(DEFAULT, 30);
+//			SysCtlDelay(SysCtlClockGet() / 3);
+//			StopPWM(DEFAULT);
+			SystemSetState(SYSTEM_GET_MOTOR_MODEL);
 			break;
 		case SYSTEM_GET_MOTOR_MODEL:
 			statecount = 2;
 			LED1_ON();
 			SysCtlDelay(SysCtlClockGet() / 3);
 			LED1_OFF();
-			system_SetState(SYSTEM_ESTIMATE_MOTOR_MODEL);
-//			speed_set(10);
+			SystemSetState(SYSTEM_ESTIMATE_MOTOR_MODEL);
+			speed_set(MOTOR_LEFT, 10);
+			speed_set(MOTOR_RIGHT, 10);
 			break;
 		case SYSTEM_ESTIMATE_MOTOR_MODEL:
 			statecount = 3;
@@ -38,22 +45,25 @@ void ButtonLeftHandler(void){
 			SysCtlDelay(SysCtlClockGet() / 3);
 			LED3_OFF();
 			StopPWM(DEFAULT);
-			system_SetState(SYSTEM_SAVE_MOTOR_MODEL);
+			SystemSetState(SYSTEM_SAVE_MOTOR_MODEL);
 			break;
 		case SYSTEM_SAVE_MOTOR_MODEL:
 			statecount = 4;
-			saveMotorModel();
-			system_SetState(SYSTEM_WAIT_TO_RUN);
+//			saveMotorModel();
+			SystemSetState(SYSTEM_WAIT_TO_RUN);
 			break;
 		case SYSTEM_WAIT_TO_RUN:
 			statecount = 5;
+			LED1_ON();
 			SysCtlDelay(SysCtlClockGet() / 3);
-			system_SetState(SYSTEM_RUN_IMAGE_PROCESSING);
-			qei_setPos(0);
+			LED1_OFF();
+			SystemSetState(SYSTEM_RUN_IMAGE_PROCESSING);
+			QeiSetPositionLeft(0);
+			QeiSetPositionRight(0);
 			break;
 		case SYSTEM_RUN_IMAGE_PROCESSING:
 			statecount = 6;
-//			speed_set(10);
+//			speed_set(30);
 			break;
 		default:
 			break;
@@ -71,14 +81,16 @@ void ButtonRightHandler(void){
 }
 
 int main(void){
-	system_SetState(SYSTEM_INITIALIZE);
-	Config_System();
-	LEDDisplayInit();
-	Timer_Init();
+	SystemSetState(SYSTEM_INITIALIZE);
+	ConfigSystem();
 	EEPROMConfig();
-	speed_control_init();
-    qei_init(20);
-    Button_init();
+	LEDDisplayInit();
+	TimerInit();
+	SpeedControlInit();
+	QeiInit(20);
+    ButtonInit();
+    LineFollowInit();
+    ADCInit();
 
 	ButtonRegisterCallback(BUTTON_LEFT, &ButtonLeftHandler);
 //	ButtonRegisterCallback(BUTTON_RIGHT, &ButtonRightHandler);

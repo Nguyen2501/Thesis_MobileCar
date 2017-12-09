@@ -24,7 +24,7 @@ void TIMER_ISR(void);
 //* Private variables -------------------------------------------------------*/
 static TIMEOUT_EVT timer_event_list[MAX_TIMEOUT_EVT];
 
-void Timer_Init(void)
+void TimerInit(void)
 {
 	SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER4);
 
