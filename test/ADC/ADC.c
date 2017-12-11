@@ -96,33 +96,47 @@ uint8_t LineState(){
 int8_t LineValuePID(uint8_t sensorstate){
 	switch (sensorstate) {
 		case 0x40:
+//			return -10;
 			return -6;
 		case 0x60:
+//			return -9;
 			return -5;
 		case 0x20:
+//			return -8;
 			return -4;
 		case 0x30:
+//			return -7;
 			return -3;
 		case 0x10:
+//			return -6;
 			return -2;
 		case 0x18:
+//			return -5;
 			return -1;
 		case 0x08:
+//			return -4;
 			return 0;
 		case 0x0D:
+//			return -3;
 			return 1;
 		case 0x04:
+//			return -2;
 			return 2;
 		case 0x06:
+//			return -1;
 			return 3;
 		case 0x02:
+//			return 0;
 			return 4;
 		case 0x03:
+//			return 1;
 			return 5;
 		case 0x01:
+//			return 2;
 			return 6;
 		default:
 			return 0;
+//			return 3;
 	}
 }
 

@@ -31,7 +31,7 @@ static int32_t SetPoint[2] = {0, 0};
 static int32_t RealSpeedSet[2] = {0, 0};
 static float udk = 0;
 static TIMER_ID speed_control_timID = INVALID_TIMER_ID;
-float udkmain;
+float udkmain[2] = {0, 0};
 uint32_t Period;
 int32_t Dutycycle;
 void SpeedControlInit(void)
@@ -52,14 +52,13 @@ void ProcessSpeedControl(void)
 	if (QeiGetVelocity(0, &Velocity[0]) == true)
 	{
 		udk = STR_Indirect(Theta, RealSpeedSet[0], Velocity[0]);
-		udkmain = udk;
-//		SetPWM(DEFAULT, udk);
+		udkmain[0] = udk;
 		SetPWMCW_RightMotor(DEFAULT, udk);
 		Uocluong(udk, Velocity[0], Theta, Theta_);
 	}
 	if (QeiGetVelocity(1, &Velocity[1]) == true) {
 		udk = STR_Indirect2(Theta2, RealSpeedSet[1], Velocity[1]);
-//		SetPWM(DEFAULT)
+		udkmain[1] = udk;
 		SetPWMCW_LeftMotor(DEFAULT, udk);
 		Uocluong2(udk, Velocity[1], Theta2, Theta2_);
 	}
@@ -177,12 +176,12 @@ void StopPWM(uint32_t ulFrequency){
 	uint32_t ulPeriod;
 	ulPeriod = SysCtlClockGet() / ulFrequency;
 	TimerLoadSet(PWM_MOTOR_LEFT_A, ulPeriod);
-	TimerMatchSet(PWM_MOTOR_LEFT_A, ulPeriod);
 	TimerLoadSet(PWM_MOTOR_LEFT_B, ulPeriod);
+	TimerMatchSet(PWM_MOTOR_LEFT_A, ulPeriod);
 	TimerMatchSet(PWM_MOTOR_LEFT_B, ulPeriod);
 	TimerLoadSet(PWM_MOTOR_RIGHT_A, ulPeriod);
-	TimerMatchSet(PWM_MOTOR_RIGHT_A, ulPeriod);
 	TimerLoadSet(PWM_MOTOR_RIGHT_B, ulPeriod);
+	TimerMatchSet(PWM_MOTOR_RIGHT_A, ulPeriod);
 	TimerMatchSet(PWM_MOTOR_RIGHT_B, ulPeriod);
 }
 
@@ -193,7 +192,6 @@ void StopPWM(uint32_t ulFrequency){
  */
 void speed_set(MOTOR_SELECT select, int32_t speed)
 {
-//	speed_Enable_Hbridge(true);
 	if(select == MOTOR_RIGHT){
 		if (SetPoint[0] != speed)
 		{
@@ -222,10 +220,10 @@ static void speed_update_setpoint(void)
 
 	for (i = 0; i < 2; i++)
 	{
-		if (RealSpeedSet[i] + 20 < SetPoint[i])
-			RealSpeedSet[i] += 20;
-		else if (RealSpeedSet[i] > SetPoint[i] + 20)
-			RealSpeedSet[i] -= 20;
+		if (RealSpeedSet[i] + 1 < SetPoint[i])
+			RealSpeedSet[i] += 1;
+		else if (RealSpeedSet[i] > SetPoint[i] + 1)
+			RealSpeedSet[i] -= 1;
 		else
 			RealSpeedSet[i] = SetPoint[i];
 	}

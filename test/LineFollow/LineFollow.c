@@ -8,17 +8,17 @@
 #include "../include.h"
 #include "LineFollow.h"
 
-#define AVG_SPEED_FORWARD_FAST 30
-#define AVG_SPEED_FORWARD 20
-#define AVG_SPEED_FORWARD_SLOW 10
-#define AVG_SPEED_FORWARD_BACKWARD 30
+#define SPEED_OFFSET 4
+
+#define AVG_SPEED_FORWARD_FAST 7
+#define AVG_SPEED_FORWARD 5
+#define AVG_SPEED_FORWARD_SLOW 4
+#define AVG_SPEED_FORWARD_BACKWARD 3
 
 static void PIDProcessCallback(void);
 static void PIDStopTimeout(void);
 static TIMER_ID PIDRuntimeout(TIMER_CALLBACK_FUNC CallbackFcn, uint32_t msTime);
-//static bool TurnLeft(int forwardpulse, int averagespeedleft, int averagespeedright, int turnpulse, int forwardpulse2);
-//static bool TurnRight(int forwardpulse, int averagespeedleft, int averagespeedright, int turnpulse, int forwardpulse2);
-//static bool Forward(int averagespeedleft, int averagespeedright);
+
 static bool Forward();
 static bool TurnBack(int forwardpulse, int averagespeedleft, int averagespeedright, int turnpulse);
 static bool TurnLeft(int forwardpulse, int averagespeedleft, int averagespeedright, int turnpulse);
@@ -29,7 +29,12 @@ static int32_t ControlStep = 1;
 static uint32_t ui32msLoop = 0;
 static TIMER_ID pidTimerID = INVALID_TIMER_ID;
 static bool checkforward = false;
-PID_PARAMETERS pidlinefollow = {.Kp = 0, .Kd = 0, .Ki = 0, .Ts = 0.020, .Saturation = 300, .e_ = 0, .e__ = 0, .u_ = 0};
+
+uint8_t linestate_global;
+int8_t error_global, u_global;
+int32_t set_speed_global[2];
+
+PID_PARAMETERS pidlinefollow = {.Kp = 0.8, .Kd = 0, .Ki = 0, .Ts = 0.020, .Saturation = 300, .e_ = 0, .e__ = 0, .u_ = 0};
 
 static void PIDLineFollowInit(){
 	ui32msLoop = pidlinefollow.Ts * 1000;
@@ -46,10 +51,20 @@ static bool PIDLineFollow(float averagespeed){
 	static int8_t error, u;
 	int32_t set_speed[2];
 	linestate = LineState();
+	linestate_global = linestate;
 	error = LineValuePID(linestate);
+	error_global = error;
 	u = PIDProcess(&pidlinefollow, error);
-	set_speed[0] = averagespeed + (int32_t)(u / 2);
-	set_speed[1] = averagespeed - (int32_t)(u / 2);
+	u_global = u;
+
+//	set_speed[0] = averagespeed + (int32_t)(u / 2);
+//	set_speed[1] = averagespeed - (int32_t)(u / 2);
+
+	set_speed[0] = averagespeed - (int32_t)(u / 2);
+	set_speed[1] = averagespeed + (int32_t)(u / 2);
+
+	set_speed_global[0] = set_speed[0] /2;
+	set_speed_global[1] = set_speed[1];
 
 	speed_set(MOTOR_RIGHT, set_speed[0]);
 	speed_set(MOTOR_LEFT, set_speed[1]);

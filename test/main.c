@@ -6,12 +6,17 @@ extern void SetPWMCCW_RightMotor(uint32_t ulFrequency, int32_t ucDutyCycle);
 extern void SetPWMCW_RightMotor(uint32_t ulFrequency, int32_t ucDutyCycle);
 extern void GetValue(uint32_t *adc_raw);
 
+extern int8_t error_global, u_global;
+extern int32_t set_speed_global[2];
+extern uint8_t linestate_global;
 extern int32_t Vel[2];
 extern float udkmain;
 extern uint32_t Period;
 extern int32_t Dutycycle;
 extern uint32_t calib_white[7], calib_black[7];
 extern volatile int8_t statecount = 0;
+int32_t left_position = 0, right_position = 0, gainvelocity = 0;
+
 
 enum calib_color{
 	CALIB_WHITE,
@@ -25,9 +30,7 @@ void ButtonLeftHandler(void){
 			LED2_ON();
 			SysCtlDelay(SysCtlClockGet() / 3);
 			LED2_OFF();
-//			SetPWMCW_LeftMotor(DEFAULT, 30);
-//			SysCtlDelay(SysCtlClockGet() / 3);
-//			StopPWM(DEFAULT);
+			StopPWM(DEFAULT);
 			SystemSetState(SYSTEM_GET_MOTOR_MODEL);
 			break;
 		case SYSTEM_GET_MOTOR_MODEL:
@@ -36,20 +39,20 @@ void ButtonLeftHandler(void){
 			SysCtlDelay(SysCtlClockGet() / 3);
 			LED1_OFF();
 			SystemSetState(SYSTEM_ESTIMATE_MOTOR_MODEL);
-			speed_set(MOTOR_LEFT, 10);
-			speed_set(MOTOR_RIGHT, 10);
+			speed_set(MOTOR_LEFT, 6);
+			speed_set(MOTOR_RIGHT, 3);
 			break;
 		case SYSTEM_ESTIMATE_MOTOR_MODEL:
 			statecount = 3;
-			LED3_ON();
-			SysCtlDelay(SysCtlClockGet() / 3);
-			LED3_OFF();
+//			LED3_ON();
+//			SysCtlDelay(SysCtlClockGet() / 3);
+//			LED3_OFF();
 			StopPWM(DEFAULT);
 			SystemSetState(SYSTEM_SAVE_MOTOR_MODEL);
 			break;
 		case SYSTEM_SAVE_MOTOR_MODEL:
 			statecount = 4;
-//			saveMotorModel();
+			saveMotorModel();
 			SystemSetState(SYSTEM_WAIT_TO_RUN);
 			break;
 		case SYSTEM_WAIT_TO_RUN:
@@ -97,7 +100,10 @@ int main(void){
     while(1)
     {
     	system_Process_System_State();
+//    	PIDLineFollowProcess();
+//    	ProcessSpeedControl();
+//    	left_position = QeiGetPositionLeft();
+//    	right_position = QeiGetPositionRight();
     }
-
 }
 

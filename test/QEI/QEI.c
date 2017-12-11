@@ -19,6 +19,29 @@ int32_t Velocity[2] = {0, 0};
 
 void QeiInit(uint16_t ms_Timebase)
 {
+	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOD);
+
+//	HWREG(GPIO_PORTD_BASE + GPIO_O_LOCK) = GPIO_LOCK_KEY; //In Tiva include this is the same as "_DD" in older versions (0x4C4F434B)
+//	HWREG(GPIO_PORTD_BASE + GPIO_O_CR) |= 0x80;
+//	HWREG(GPIO_PORTD_BASE + GPIO_O_AFSEL) &= ~0x80;
+
+	SysCtlPeripheralEnable(SYSCTL_PERIPH_QEI0);
+	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOD);
+
+	QEIDisable(QEI0_BASE);
+	QEIIntDisable(QEI0_BASE, QEI_INTERROR | QEI_INTDIR | QEI_INTTIMER | QEI_INTINDEX);
+	QEIConfigure(QEI0_BASE, QEI_CONFIG_CAPTURE_A_B | QEI_CONFIG_NO_RESET
+	    		| QEI_CONFIG_QUADRATURE | QEI_CONFIG_SWAP, 0xFFFFFFFF);
+
+	GPIOPinTypeQEI(GPIO_PORTD_BASE, GPIO_PIN_6 | GPIO_PIN_7);
+
+	GPIOPinConfigure(GPIO_PD6_PHA0);
+	GPIOPinConfigure(GPIO_PD7_PHB0);
+
+	QEIVelocityConfigure(QEI0_BASE, QEI_VELDIV_1, SysCtlClockGet() * ms_Timebase / 1000);
+	QEIVelocityEnable(QEI0_BASE);
+	QEIEnable(QEI0_BASE);
+
     SysCtlPeripheralEnable(SYSCTL_PERIPH_QEI1);
     SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOC);
     QEIConfigure(QEI1_BASE, QEI_CONFIG_CAPTURE_A_B | QEI_CONFIG_NO_RESET
@@ -26,32 +49,22 @@ void QeiInit(uint16_t ms_Timebase)
     GPIOPinTypeQEI(GPIO_PORTC_BASE, GPIO_PIN_5 | GPIO_PIN_6);
     GPIOPinConfigure(GPIO_PC5_PHA1);
     GPIOPinConfigure(GPIO_PC6_PHB1);
-    QEIVelocityConfigure(QEI1_BASE, QEI_VELDIV_2, SysCtlClockGet() * ms_Timebase / 1000);
+
+    QEIDisable(QEI1_BASE);
+    QEIIntDisable(QEI1_BASE, QEI_INTERROR | QEI_INTDIR | QEI_INTTIMER | QEI_INTINDEX);
+
+    QEIVelocityConfigure(QEI1_BASE, QEI_VELDIV_1, SysCtlClockGet() * ms_Timebase / 1000);
     QEIVelocityEnable(QEI1_BASE);
     QEIEnable(QEI1_BASE);
 
+    QEIIntEnable(QEI0_BASE, QEI_INTTIMER);
     QEIIntEnable(QEI1_BASE, QEI_INTTIMER);
 
+    QEIIntRegister(QEI0_BASE, &QEI0_VelocityIsr);
     QEIIntRegister(QEI1_BASE, &QEI1_VelocityIsr);
 
-    GPIOPadConfigSet(GPIO_PORTC_BASE, GPIO_PIN_5 | GPIO_PIN_6, GPIO_STRENGTH_8MA_SC, GPIO_PIN_TYPE_STD_WPU);
-
-    SysCtlPeripheralEnable(SYSCTL_PERIPH_QEI0);
-    SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOD);
-    QEIConfigure(QEI0_BASE, QEI_CONFIG_CAPTURE_A_B | QEI_CONFIG_NO_RESET
-    		| QEI_CONFIG_QUADRATURE | QEI_CONFIG_SWAP, 0xFFFFFFFF);
-    GPIOPinTypeQEI(GPIO_PORTD_BASE, GPIO_PIN_6 | GPIO_PIN_7);
-    GPIOPinConfigure(GPIO_PD6_PHA0);
-    GPIOPinConfigure(GPIO_PD7_PHB0);
-    QEIVelocityConfigure(QEI0_BASE, QEI_VELDIV_2, SysCtlClockGet() * ms_Timebase / 1000);
-    QEIVelocityEnable(QEI0_BASE);
-    QEIEnable(QEI0_BASE);
-
-    QEIIntEnable(QEI0_BASE, QEI_INTTIMER);
-
-    QEIIntRegister(QEI0_BASE, &QEI0_VelocityIsr);
-
     GPIOPadConfigSet(GPIO_PORTD_BASE, GPIO_PIN_6 | GPIO_PIN_7, GPIO_STRENGTH_8MA_SC, GPIO_PIN_TYPE_STD_WPU);
+    GPIOPadConfigSet(GPIO_PORTC_BASE, GPIO_PIN_5 | GPIO_PIN_6, GPIO_STRENGTH_8MA_SC, GPIO_PIN_TYPE_STD_WPU);
 }
 
 static void QEI0_VelocityIsr(void){
