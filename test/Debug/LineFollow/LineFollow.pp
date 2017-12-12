@@ -25,6 +25,8 @@ LineFollow/LineFollow.obj: E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/adc.h
 LineFollow/LineFollow.obj: E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/fpu.h
 LineFollow/LineFollow.obj: E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/interrupt.h
 LineFollow/LineFollow.obj: E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/eeprom.h
+LineFollow/LineFollow.obj: E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/i2c.h
+LineFollow/LineFollow.obj: E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/ssi.h
 LineFollow/LineFollow.obj: E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_ints.h
 LineFollow/LineFollow.obj: E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_gpio.h
 LineFollow/LineFollow.obj: E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_memmap.h
@@ -59,6 +61,11 @@ LineFollow/LineFollow.obj: ../LineFollow/../STR/rt_nonfinite.h
 LineFollow/LineFollow.obj: C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/stddef.h
 LineFollow/LineFollow.obj: ../LineFollow/../STR/speed_control.h
 LineFollow/LineFollow.obj: ../LineFollow/../EEPROM/EEPROM.h
+LineFollow/LineFollow.obj: ../LineFollow/../SENSOR_HMC5883L/SENSOR_HMC5883L.h
+LineFollow/LineFollow.obj: ../LineFollow/../SENSOR_HMC5883L/Kalman.h
+LineFollow/LineFollow.obj: C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/math.h
+LineFollow/LineFollow.obj: ../LineFollow/../SENSOR_HMC5883L/HMC5883LPinMap.h
+LineFollow/LineFollow.obj: ../LineFollow/../MFRC522/RC522.h
 
 ../LineFollow/LineFollow.c: 
 ../LineFollow/../include.h: 
@@ -85,6 +92,8 @@ E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/adc.h:
 E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/fpu.h: 
 E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/interrupt.h: 
 E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/eeprom.h: 
+E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/i2c.h: 
+E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/ssi.h: 
 E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_ints.h: 
 E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_gpio.h: 
 E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_memmap.h: 
@@ -119,3 +128,8 @@ C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/string.h:
 C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/stddef.h: 
 ../LineFollow/../STR/speed_control.h: 
 ../LineFollow/../EEPROM/EEPROM.h: 
+../LineFollow/../SENSOR_HMC5883L/SENSOR_HMC5883L.h: 
+../LineFollow/../SENSOR_HMC5883L/Kalman.h: 
+C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/math.h: 
+../LineFollow/../SENSOR_HMC5883L/HMC5883LPinMap.h: 
+../LineFollow/../MFRC522/RC522.h: 

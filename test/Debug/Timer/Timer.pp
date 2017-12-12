@@ -25,6 +25,8 @@ Timer/Timer.obj: E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/adc.h
 Timer/Timer.obj: E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/fpu.h
 Timer/Timer.obj: E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/interrupt.h
 Timer/Timer.obj: E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/eeprom.h
+Timer/Timer.obj: E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/i2c.h
+Timer/Timer.obj: E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/ssi.h
 Timer/Timer.obj: E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_ints.h
 Timer/Timer.obj: E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_gpio.h
 Timer/Timer.obj: E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_memmap.h
@@ -59,6 +61,11 @@ Timer/Timer.obj: ../Timer/../STR/rt_nonfinite.h
 Timer/Timer.obj: C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/stddef.h
 Timer/Timer.obj: ../Timer/../STR/speed_control.h
 Timer/Timer.obj: ../Timer/../EEPROM/EEPROM.h
+Timer/Timer.obj: ../Timer/../SENSOR_HMC5883L/SENSOR_HMC5883L.h
+Timer/Timer.obj: ../Timer/../SENSOR_HMC5883L/Kalman.h
+Timer/Timer.obj: C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/math.h
+Timer/Timer.obj: ../Timer/../SENSOR_HMC5883L/HMC5883LPinMap.h
+Timer/Timer.obj: ../Timer/../MFRC522/RC522.h
 
 ../Timer/Timer.c: 
 C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/stdint.h: 
@@ -85,6 +92,8 @@ E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/adc.h:
 E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/fpu.h: 
 E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/interrupt.h: 
 E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/eeprom.h: 
+E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/i2c.h: 
+E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/ssi.h: 
 E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_ints.h: 
 E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_gpio.h: 
 E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_memmap.h: 
@@ -119,3 +128,8 @@ C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/string.h:
 C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/stddef.h: 
 ../Timer/../STR/speed_control.h: 
 ../Timer/../EEPROM/EEPROM.h: 
+../Timer/../SENSOR_HMC5883L/SENSOR_HMC5883L.h: 
+../Timer/../SENSOR_HMC5883L/Kalman.h: 
+C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/math.h: 
+../Timer/../SENSOR_HMC5883L/HMC5883LPinMap.h: 
+../Timer/../MFRC522/RC522.h: 

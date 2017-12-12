@@ -25,6 +25,8 @@ SystemConfig.obj: E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/adc.h
 SystemConfig.obj: E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/fpu.h
 SystemConfig.obj: E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/interrupt.h
 SystemConfig.obj: E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/eeprom.h
+SystemConfig.obj: E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/i2c.h
+SystemConfig.obj: E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/ssi.h
 SystemConfig.obj: E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_ints.h
 SystemConfig.obj: E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_gpio.h
 SystemConfig.obj: E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_memmap.h
@@ -59,6 +61,11 @@ SystemConfig.obj: ../STR/rt_nonfinite.h
 SystemConfig.obj: C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/stddef.h
 SystemConfig.obj: ../STR/speed_control.h
 SystemConfig.obj: ../EEPROM/EEPROM.h
+SystemConfig.obj: ../SENSOR_HMC5883L/SENSOR_HMC5883L.h
+SystemConfig.obj: ../SENSOR_HMC5883L/Kalman.h
+SystemConfig.obj: C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/math.h
+SystemConfig.obj: ../SENSOR_HMC5883L/HMC5883LPinMap.h
+SystemConfig.obj: ../MFRC522/RC522.h
 SystemConfig.obj: E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/systick.h
 
 ../SystemConfig.c: 
@@ -86,6 +93,8 @@ E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/adc.h:
 E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/fpu.h: 
 E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/interrupt.h: 
 E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/eeprom.h: 
+E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/i2c.h: 
+E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/ssi.h: 
 E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_ints.h: 
 E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_gpio.h: 
 E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_memmap.h: 
@@ -120,4 +129,9 @@ C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/string.h:
 C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/stddef.h: 
 ../STR/speed_control.h: 
 ../EEPROM/EEPROM.h: 
+../SENSOR_HMC5883L/SENSOR_HMC5883L.h: 
+../SENSOR_HMC5883L/Kalman.h: 
+C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/math.h: 
+../SENSOR_HMC5883L/HMC5883LPinMap.h: 
+../MFRC522/RC522.h: 
 E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/systick.h: 

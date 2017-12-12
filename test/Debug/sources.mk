@@ -111,7 +111,9 @@ SUBDIRS := \
 . \
 Timer \
 STR \
+SENSOR_HMC5883L \
 QEI \
+MFRC522 \
 LineFollow \
 EEPROM \
 Button \

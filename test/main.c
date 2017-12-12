@@ -16,14 +16,16 @@ extern int32_t Dutycycle;
 extern uint32_t calib_white[7], calib_black[7];
 extern volatile int8_t statecount = 0;
 int32_t left_position = 0, right_position = 0, gainvelocity = 0;
-
-
+extern int16_t XaxisRaw, YaxisRaw, ZaxisRaw;
+extern int headingAngle;
+extern Kalman headingkalman;
+int currentangle = 0;
 enum calib_color{
 	CALIB_WHITE,
 	CALIB_BLACK
 }calib_color;
 
-void ButtonLeftHandler(void){
+void ButtonRightHandler(void){
 	switch (SystemGetState()) {
 		case SYSTEM_INITIALIZE:
 			statecount = 1;
@@ -73,14 +75,15 @@ void ButtonLeftHandler(void){
 	}
 }
 
-void ButtonRightHandler(void){
-	if (calib_color == CALIB_BLACK) {
-		GetValue(calib_black);
-		calib_color = CALIB_WHITE;
-	} else if(calib_color == CALIB_WHITE){
-		GetValue(calib_white);
-		calib_color = CALIB_BLACK;
-	}
+void ButtonLeftHandler(void){
+//	if (calib_color == CALIB_BLACK) {
+//		GetValue(calib_black);
+//		calib_color = CALIB_WHITE;
+//	} else if(calib_color == CALIB_WHITE){
+//		GetValue(calib_white);
+//		calib_color = CALIB_BLACK;
+//	}
+//	LED1_TOGGLE();
 }
 
 int main(void){
@@ -94,16 +97,16 @@ int main(void){
     ButtonInit();
     LineFollowInit();
     ADCInit();
+    Hmc5883lInit();
 
 	ButtonRegisterCallback(BUTTON_LEFT, &ButtonLeftHandler);
-//	ButtonRegisterCallback(BUTTON_RIGHT, &ButtonRightHandler);
+	ButtonRegisterCallback(BUTTON_RIGHT, &ButtonRightHandler);
+
     while(1)
     {
     	system_Process_System_State();
 //    	PIDLineFollowProcess();
 //    	ProcessSpeedControl();
-//    	left_position = QeiGetPositionLeft();
-//    	right_position = QeiGetPositionRight();
     }
 }
 

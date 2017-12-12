@@ -23,6 +23,8 @@
 #include "driverlib/fpu.h"
 #include "driverlib/interrupt.h"
 #include "driverlib/eeprom.h"
+#include "driverlib/i2c.h"
+#include "driverlib/ssi.h"
 #include "inc/hw_ints.h"
 #include "inc/hw_gpio.h"
 #include "inc/hw_memmap.h"
@@ -35,10 +37,17 @@
 #include "ADC/ADC.h"
 #include "LineFollow/PID.h"
 #include "LineFollow/LineFollow.h"
+
 #include "STR/Uocluong.h"
 #include "STR/STR_Indirect.h"
 #include "STR/Control_initialize.h"
 #include "STR/speed_control.h"
+
 #include "EEPROM/EEPROM.h"
 
+#include "SENSOR_HMC5883L/SENSOR_HMC5883L.h"
+#include "SENSOR_HMC5883L/HMC5883LPinMap.h"
+#include "SENSOR_HMC5883L/Kalman.h"
+
+#include "MFRC522/RC522.h"
 #endif /* INCLUDE_H_ */

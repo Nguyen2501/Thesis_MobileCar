@@ -21,9 +21,9 @@ void QeiInit(uint16_t ms_Timebase)
 {
 	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOD);
 
-//	HWREG(GPIO_PORTD_BASE + GPIO_O_LOCK) = GPIO_LOCK_KEY; //In Tiva include this is the same as "_DD" in older versions (0x4C4F434B)
-//	HWREG(GPIO_PORTD_BASE + GPIO_O_CR) |= 0x80;
-//	HWREG(GPIO_PORTD_BASE + GPIO_O_AFSEL) &= ~0x80;
+	HWREG(GPIO_PORTD_BASE + GPIO_O_LOCK) = GPIO_LOCK_KEY; //In Tiva include this is the same as "_DD" in older versions (0x4C4F434B)
+	HWREG(GPIO_PORTD_BASE + GPIO_O_CR) |= 0x80;
+	HWREG(GPIO_PORTD_BASE + GPIO_O_AFSEL) &= ~0x80;
 
 	SysCtlPeripheralEnable(SYSCTL_PERIPH_QEI0);
 	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOD);

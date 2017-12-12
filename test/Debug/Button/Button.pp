@@ -25,6 +25,8 @@ Button/Button.obj: E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/adc.h
 Button/Button.obj: E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/fpu.h
 Button/Button.obj: E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/interrupt.h
 Button/Button.obj: E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/eeprom.h
+Button/Button.obj: E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/i2c.h
+Button/Button.obj: E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/ssi.h
 Button/Button.obj: E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_ints.h
 Button/Button.obj: E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_gpio.h
 Button/Button.obj: E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_memmap.h
@@ -59,6 +61,11 @@ Button/Button.obj: ../Button/../STR/rt_nonfinite.h
 Button/Button.obj: C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/stddef.h
 Button/Button.obj: ../Button/../STR/speed_control.h
 Button/Button.obj: ../Button/../EEPROM/EEPROM.h
+Button/Button.obj: ../Button/../SENSOR_HMC5883L/SENSOR_HMC5883L.h
+Button/Button.obj: ../Button/../SENSOR_HMC5883L/Kalman.h
+Button/Button.obj: C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/math.h
+Button/Button.obj: ../Button/../SENSOR_HMC5883L/HMC5883LPinMap.h
+Button/Button.obj: ../Button/../MFRC522/RC522.h
 
 ../Button/Button.c: 
 ../Button/../include.h: 
@@ -85,6 +92,8 @@ E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/adc.h:
 E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/fpu.h: 
 E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/interrupt.h: 
 E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/eeprom.h: 
+E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/i2c.h: 
+E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/ssi.h: 
 E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_ints.h: 
 E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_gpio.h: 
 E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_memmap.h: 
@@ -119,3 +128,8 @@ C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/string.h:
 C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/stddef.h: 
 ../Button/../STR/speed_control.h: 
 ../Button/../EEPROM/EEPROM.h: 
+../Button/../SENSOR_HMC5883L/SENSOR_HMC5883L.h: 
+../Button/../SENSOR_HMC5883L/Kalman.h: 
+C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/math.h: 
+../Button/../SENSOR_HMC5883L/HMC5883LPinMap.h: 
+../Button/../MFRC522/RC522.h: 

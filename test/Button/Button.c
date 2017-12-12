@@ -13,12 +13,6 @@
 #include "../include.h"
 #include "Button.h"
 
-#define GPIO_PORT_BUTTON GPIO_PORTF_BASE
-#define INT_BUTTON INT_GPIOF
-#define SYSCTL_PERIPH_BUTTON SYSCTL_PERIPH_GPIOF
-#define GPIO_PIN_BUTTON_RIGHT GPIO_PIN_4
-#define GPIO_PIN_BUTTON_LEFT GPIO_PIN_0
-
 //* Private function prototype ----------------------------------------------*/
 static void ButtonsISR(void);
 static void (*Button_right_callback)(), (*Button_left_callback)();

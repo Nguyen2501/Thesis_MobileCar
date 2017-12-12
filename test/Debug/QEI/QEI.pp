@@ -25,6 +25,8 @@ QEI/QEI.obj: E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/adc.h
 QEI/QEI.obj: E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/fpu.h
 QEI/QEI.obj: E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/interrupt.h
 QEI/QEI.obj: E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/eeprom.h
+QEI/QEI.obj: E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/i2c.h
+QEI/QEI.obj: E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/ssi.h
 QEI/QEI.obj: E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_ints.h
 QEI/QEI.obj: E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_gpio.h
 QEI/QEI.obj: E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_memmap.h
@@ -59,6 +61,11 @@ QEI/QEI.obj: ../QEI/../STR/rt_nonfinite.h
 QEI/QEI.obj: C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/stddef.h
 QEI/QEI.obj: ../QEI/../STR/speed_control.h
 QEI/QEI.obj: ../QEI/../EEPROM/EEPROM.h
+QEI/QEI.obj: ../QEI/../SENSOR_HMC5883L/SENSOR_HMC5883L.h
+QEI/QEI.obj: ../QEI/../SENSOR_HMC5883L/Kalman.h
+QEI/QEI.obj: C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/math.h
+QEI/QEI.obj: ../QEI/../SENSOR_HMC5883L/HMC5883LPinMap.h
+QEI/QEI.obj: ../QEI/../MFRC522/RC522.h
 
 ../QEI/QEI.c: 
 ../QEI/../include.h: 
@@ -85,6 +92,8 @@ E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/adc.h:
 E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/fpu.h: 
 E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/interrupt.h: 
 E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/eeprom.h: 
+E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/i2c.h: 
+E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/ssi.h: 
 E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_ints.h: 
 E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_gpio.h: 
 E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_memmap.h: 
@@ -119,3 +128,8 @@ C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/string.h:
 C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/stddef.h: 
 ../QEI/../STR/speed_control.h: 
 ../QEI/../EEPROM/EEPROM.h: 
+../QEI/../SENSOR_HMC5883L/SENSOR_HMC5883L.h: 
+../QEI/../SENSOR_HMC5883L/Kalman.h: 
+C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/math.h: 
+../QEI/../SENSOR_HMC5883L/HMC5883LPinMap.h: 
+../QEI/../MFRC522/RC522.h: 

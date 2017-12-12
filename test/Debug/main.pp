@@ -25,6 +25,8 @@ main.obj: E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/adc.h
 main.obj: E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/fpu.h
 main.obj: E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/interrupt.h
 main.obj: E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/eeprom.h
+main.obj: E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/i2c.h
+main.obj: E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/ssi.h
 main.obj: E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_ints.h
 main.obj: E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_gpio.h
 main.obj: E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_memmap.h
@@ -59,6 +61,11 @@ main.obj: ../STR/rt_nonfinite.h
 main.obj: C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/stddef.h
 main.obj: ../STR/speed_control.h
 main.obj: ../EEPROM/EEPROM.h
+main.obj: ../SENSOR_HMC5883L/SENSOR_HMC5883L.h
+main.obj: ../SENSOR_HMC5883L/Kalman.h
+main.obj: C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/math.h
+main.obj: ../SENSOR_HMC5883L/HMC5883LPinMap.h
+main.obj: ../MFRC522/RC522.h
 
 ../main.c: 
 ../include.h: 
@@ -85,6 +92,8 @@ E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/adc.h:
 E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/fpu.h: 
 E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/interrupt.h: 
 E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/eeprom.h: 
+E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/i2c.h: 
+E:/ti/TivaWare_C_Series-2.1.4.178/driverlib/ssi.h: 
 E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_ints.h: 
 E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_gpio.h: 
 E:/ti/TivaWare_C_Series-2.1.4.178/inc/hw_memmap.h: 
@@ -119,3 +128,8 @@ C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/string.h:
 C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/stddef.h: 
 ../STR/speed_control.h: 
 ../EEPROM/EEPROM.h: 
+../SENSOR_HMC5883L/SENSOR_HMC5883L.h: 
+../SENSOR_HMC5883L/Kalman.h: 
+C:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.9/include/math.h: 
+../SENSOR_HMC5883L/HMC5883LPinMap.h: 
+../MFRC522/RC522.h: 
